@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    airplayer (0.0.1)
+      airplay
+      ruby-progressbar
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    airplay (0.2.9)
+      dnssd (~> 2.0)
+      net-http-digest_auth (~> 1.2)
+      net-http-persistent (>= 2.6)
+    dnssd (2.0)
+    net-http-digest_auth (1.2.1)
+    net-http-persistent (2.7)
+    ruby-progressbar (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  airplayer!
