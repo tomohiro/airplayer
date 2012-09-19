@@ -3,7 +3,7 @@ require 'ruby-progressbar'
 
 module AirPlayer
   class CLI
-    def self.play(*args)
+    def self.play(args)
       self.new.play(args.first)
     end
 
@@ -12,9 +12,15 @@ module AirPlayer
       @timeout = 30
     end
 
-    def play(uri)
+    def devices
+      @airplay.browse.each do |device|
+        puts "#{device.name}: #{device.ip}"
+      end
+    end
+
+    def play(uri = nil)
       usage if uri.nil?
-      puts "AirPlay: #{uri}\n=="
+      puts "AirPlay: #{uri}"
 
       interval     = 1
       elapsed_time = 0
@@ -22,8 +28,8 @@ module AirPlayer
       player       = @airplay.send_video(uri)
 
       progressbar  = nil
-      format       = '%a |%b%i| %p%% %t'
-      ProgressBar.create(:format => format , :title => :Streaming)
+      format       = '   %a |%b%i| %p%% %t'
+      ProgressBar.create(:format => format , :title => :Waiting)
 
       loop do
         scrub    = player.scrub

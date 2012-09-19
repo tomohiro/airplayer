@@ -1,5 +1,8 @@
-require "airplayer/version"
+require 'rubygems'
+require 'airplay'
 
-module Airplayer
-  # Your code goes here...
+require 'airplayer/version'
+
+module AirPlayer
+  autoload :CLI, 'airplayer/cli'
 end
