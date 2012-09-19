@@ -1,29 +1,30 @@
-# Airplayer
+AirPlayer
+================================================================================
 
-TODO: Write a gem description
+Command-line AirPlay video client
 
-## Installation
+---
 
-Add this line to your application's Gemfile:
 
-    gem 'airplayer'
+Show my AirPlay devices
 
-And then execute:
+```sh
+$ airplayer devices
+Apple TV: 10.0.1.3
+```
 
-    $ bundle
+Play video
 
-Or install it yourself as:
+```sh
+$ airplayer play http://example.com/my-video.mp4
+AirPlay: http://example.com/my-video.mp4
+   Time: 00:00:06 |=====                                             | 13% Streaming
+```
 
-    $ gem install airplayer
 
-## Usage
+LICENSE
+--------------------------------------------------------------------------------
 
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+&copy; 2012 Tomohiro, TAIRA.
+This project is licensed under the MIT license.
+See LICENSE for details.
