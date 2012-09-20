@@ -1,25 +1,55 @@
 AirPlayer
 ================================================================================
 
-Command-line AirPlay video client
+Command-line AirPlay video client for AppleTV
+
+[![Build Status](https://secure.travis-ci.org/Tomohiro/airplayer.png)](https://secure.travis-ci.org/Tomohiro/airplayer)
+[![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Tomohiro/airplayer)
+
 
 ---
 
 
-Show my AirPlay devices
+Requirements
+-------------------------------------------------------------------------------
+
+- Ruby 1.9.2 or later
+- AppleTV 2G or later
+
+
+Getting Started
+--------------------------------------------------------------------------------
+
+### Bundler
 
 ```sh
-$ airplayer devices
-Apple TV: 10.0.1.3
+$ git clone git://github.com/Tomohiro/airplayer.git
+$ cd airplayer
+$ bundle install --path vendor/bundle
 ```
 
-Play video
+
+### RubyGems
+
+coming soon
+
+
+Usage
+--------------------------------------------------------------------------------
+
+### Play video
 
 ```sh
 $ airplayer play http://example.com/my-video.mp4
 AirPlay: http://example.com/my-video.mp4
    Time: 00:00:06 |=====                                             | 13% Streaming
 ```
+
+### Play video on the local file system
+
+coming soon
+
 
 
 LICENSE
