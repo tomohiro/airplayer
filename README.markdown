@@ -18,10 +18,10 @@ Requirements
 - AppleTV 2G or later
 
 
-Getting Started
+Installation
 --------------------------------------------------------------------------------
 
-### Bundler
+## Bundler
 
 ```sh
 $ git clone git://github.com/Tomohiro/airplayer.git
@@ -32,24 +32,29 @@ $ bundle install --path vendor/bundle
 
 ### RubyGems
 
-coming soon
+```sh
+$ gem install airplayer
+```
 
 
 Usage
 --------------------------------------------------------------------------------
 
-### Play video
+### Play online video
 
 ```sh
 $ airplayer play http://example.com/my-video.mp4
-AirPlay: http://example.com/my-video.mp4
-   Time: 00:00:06 |=====                                             | 13% Streaming
+AirPlay: http://example.com/my-video.mp4 to Apple TV(10.0.1.18)
+   Time: 00:00:31 |==============================================| 100% Complete
 ```
 
-### Play video on the local file system
+### Play local video
 
-coming soon
-
+```sh
+$ airplayer play $HOME/Movies/video.mp4
+AirPlay: http://10.0.1.13:7070 to Apple TV(10.0.1.18)
+   Time: 00:00:31 |==============================================| 100% Complete
+```
 
 
 LICENSE
