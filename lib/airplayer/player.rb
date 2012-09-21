@@ -28,58 +28,63 @@ module AirPlayer
       end
 
       puts "AirPlay: #{uri}"
-      scrubbing(uri)
-    rescue BufferingTimeoutError
-      puts 'Timeout'
-      abort
-    end
 
-    def scrubbing(uri)
       @player = @airplay.send_video(uri)
 
       format = '   %a |%b%i| %p%% %t'
       @progressbar = ProgressBar.create(:format => format , :title => :Waiting)
 
-      until finish? do
-        timeout @timeout, BufferingTimeoutError do
-          buffering
-        end
-
-        playback_info
+      buffering
+      while scrubbing do
         @progressbar.progress = @current_sec
       end
-
-      @player.stop
+      stop
+    rescue BufferingTimeoutError
+      abort 'Buffering timeout error.'
     end
 
-    private
+    def stop
+      unless @player.nil?
+        @player.stop
+      end
+
+      unless @progressbar.nil?
+        @progressbar.title    = :Complete
+        @progressbar.finish
+      end
+    end
+
+   private
       def local_file?(path)
         File.exist? path
       end
 
-      def playback_info
+      def buffering
+        timeout @timeout, BufferingTimeoutError do
+          loop do
+            scrubbing
+            redo unless buffering?
+            @progressbar.title = :Streaming
+            @progressbar.total = @total_sec
+            break
+          end
+        end
+      end
+
+      def scrubbing
         scrub = @player.scrub
         @total_sec   = scrub['duration']
         @current_sec = scrub['position']
         sleep @interval
+        progress?
       end
 
-      def buffering
-        loop do
-          playback_info
-          redo unless buffering?
-          @progressbar.title = :Streaming
-          @progressbar.total = @total_sec
-          break
-        end
+      def progress?
+        0 < @current_sec && @current_sec < @total_sec
       end
 
       def buffering?
-        0 < @total_sec
-      end
-
-      def finish?
-        buffering? && @current_sec == @total_sec
+        0 < @total_sec && 0 < @current_sec
       end
   end
 end
