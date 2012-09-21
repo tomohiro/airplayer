@@ -8,34 +8,32 @@ module AirPlayer
     BufferingTimeoutError = Class.new(TimeoutError)
 
     def initialize
-      @airplay      = Airplay::Client.new
-      @player       = nil
-      @progressbar  = nil
-      @timeout      = 30
-      @interval     = 1
-      @total_sec    = 0
-      @current_sec  = 0
+      @airplay     = Airplay::Client.new
+      @player      = nil
+      @progressbar = nil
+      @timeout     = 30
+      @interval    = 1
+      @total_sec   = 0
+      @current_sec = 0
     end
 
     def play(target)
       path = File.expand_path(target)
       if local_file? path
         video_server = AirPlayer::Server.new(path)
-        Thread.start { video_server.start }
         uri = video_server.uri
+        Thread.start { video_server.start }
       else
         uri = URI.encode(target)
       end
 
-      puts "AirPlay: #{uri}"
+      device = @airplay.browse.first
+      puts "AirPlay: #{uri} to #{device.name}(#{device.ip})"
 
+      @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t', :title => :Waiting)
       @player = @airplay.send_video(uri)
-
-      format = '   %a |%b%i| %p%% %t'
-      @progressbar = ProgressBar.create(:format => format , :title => :Waiting)
-
       buffering
-      while scrubbing do
+      while playing do
         @progressbar.progress = @current_sec
       end
       stop
@@ -62,7 +60,7 @@ module AirPlayer
       def buffering
         timeout @timeout, BufferingTimeoutError do
           loop do
-            scrubbing
+            playing
             redo unless buffering?
             @progressbar.title = :Streaming
             @progressbar.total = @total_sec
@@ -71,7 +69,7 @@ module AirPlayer
         end
       end
 
-      def scrubbing
+      def playing
         scrub = @player.scrub
         @total_sec   = scrub['duration']
         @current_sec = scrub['position']
