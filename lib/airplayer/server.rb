@@ -6,13 +6,16 @@ module AirPlayer
     attr_reader :uri
 
     def initialize(video_path)
-      @server = Rack::Server.new(:Host => local_ip, :Port => 7070)
+      @server = Rack::Server.new(:server => :webrick, :Host => local_ip, :Port => 7070)
       @server.instance_variable_set(:@app, Rack::File.new(video_path))
       @uri  = "http://#{@server.options[:Host]}:#{@server.options[:Port]}"
     end
 
     def start
+      # silenced WEBrick access log
+      $stderr = File.open('/dev/null', 'w')
       @server.start
+      $stderr = STDERR
     end
 
     # networking - Getting the Hostname or IP in Ruby on Rails - Stack Overflow
@@ -22,7 +25,7 @@ module AirPlayer
       orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true
 
       UDPSocket.open do |s|
-        s.connect '8.8.8.8', 1
+        s.connect('8.8.8.8', 1)
         s.addr.last
       end
     ensure
