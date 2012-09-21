@@ -49,12 +49,12 @@ module AirPlayer
       end
 
       unless @progressbar.nil?
-        @progressbar.title    = :Complete
+        @progressbar.title = :Complete
         @progressbar.finish
       end
     end
 
-   private
+    private
       def local_file?(path)
         File.exist? path
       end
