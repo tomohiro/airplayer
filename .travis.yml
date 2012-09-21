@@ -1,5 +1,5 @@
 language: ruby
-install:
+before_script:
   - sudo apt-get -qq update
   - sudo apt-get -qq install rdnssd libavahi-compat-libdnssd-dev
 script: bundle exec rake spec
