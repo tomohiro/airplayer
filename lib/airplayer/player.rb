@@ -38,7 +38,7 @@ module AirPlayer
       end
       stop
     rescue BufferingTimeoutError
-      abort 'Buffering timeout error.'
+      abort '[ERROR] Buffering timeout'
     end
 
     def stop
