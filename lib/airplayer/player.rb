@@ -7,6 +7,12 @@ module AirPlayer
   class Player
     BufferingTimeoutError = Class.new(TimeoutError)
 
+    def self.play(uri)
+      new.play(uri)
+    rescue Airplay::Client::ServerNotFoundError
+      abort '[ERROR] Apple device not found'
+    end
+
     def initialize
       @airplay     = Airplay::Client.new
       @player      = nil
