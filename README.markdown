@@ -5,6 +5,7 @@ Command-line AirPlay video client for AppleTV
 
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Tomohiro/airplayer)
+[![endorse](http://api.coderwall.com/tomohiro/endorsecount.png)](http://coderwall.com/tomohiro)
 
 
 ---
@@ -15,6 +16,13 @@ Requirements
 
 - Ruby 1.9.2 or later
 - AppleTV 2G or later
+
+
+### Ubuntu
+
+```sh
+$ sudo apt-get install rdnssd libavahi-compat-libdnssd-dev
+```
 
 
 Installation
