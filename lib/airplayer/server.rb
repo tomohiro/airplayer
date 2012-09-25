@@ -12,8 +12,8 @@ module AirPlayer
     end
 
     def start
-      # silenced WEBrick access log
-      $stderr = File.open('/dev/null', 'w')
+      # Output WEBrick access log to file
+      $stderr = File.open(LOG_PATH, File::WRONLY | File::APPEND | File::CREAT)
       @server.start
       $stderr = STDERR
     end
