@@ -20,5 +20,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'airplay'
   gem.add_runtime_dependency 'rack'
 
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
 end
