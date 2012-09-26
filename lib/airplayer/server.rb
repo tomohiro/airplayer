@@ -13,7 +13,7 @@ module AirPlayer
 
     def start
       # Output WEBrick access log to file
-      $stderr = File.open(LOG_PATH, File::WRONLY | File::APPEND | File::CREAT)
+      $stderr = File.open(Logger.path, File::WRONLY | File::APPEND | File::CREAT)
       @server.start
       $stderr = STDERR
     end
