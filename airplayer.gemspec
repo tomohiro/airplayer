@@ -6,8 +6,8 @@ Gem::Specification.new do |gem|
   gem.version       = AirPlayer::VERSION
   gem.authors       = ['Tomohiro, TAIRA']
   gem.email         = ['tomohiro.t@gmail.com']
-  gem.description   = %q{Command-line AirPlay video client for AppleTV}
-  gem.summary       = %q{Command-line AirPlay video client for AppleTV}
+  gem.description   = %q{Command-line AirPlay video client for Apple TV}
+  gem.summary       = %q{Command-line AirPlay video client for Apple TV}
   gem.homepage      = 'https://github.com/Tomohiro/airplayer'
 
   gem.files         = `git ls-files`.split($\)

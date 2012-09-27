@@ -1,7 +1,7 @@
 AirPlayer
 ================================================================================
 
-Command-line AirPlay video client for AppleTV
+Command-line AirPlay video client for Apple TV
 
 [![Build Status](https://secure.travis-ci.org/Tomohiro/airplayer.png)](https://secure.travis-ci.org/Tomohiro/airplayer)
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
