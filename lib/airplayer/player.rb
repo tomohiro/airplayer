@@ -7,8 +7,8 @@ module AirPlayer
   class Player
     BufferingTimeoutError = Class.new(TimeoutError)
 
-    def self.play(uri)
-      new.play(uri)
+    def self.play(*opts)
+      new.play(*opts)
     rescue Airplay::Client::ServerNotFoundError
       abort '[ERROR] Apple device not found'
     end
@@ -23,7 +23,7 @@ module AirPlayer
       @current_sec = 0
     end
 
-    def play(target)
+    def play(target, repeat = false)
       path = File.expand_path(target)
       if local_file? path
         video_server = AirPlayer::Server.new(path)
@@ -35,16 +35,27 @@ module AirPlayer
 
       device = @airplay.browse.first
       puts "AirPlay: #{uri} to #{device.name}(#{device.ip})"
-
       @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t', :title => :Waiting)
       @player = @airplay.send_video(uri)
-      buffering
-      while playing do
-        @progressbar.progress = @current_sec
+
+      loop do
+        buffering
+        @progressbar.progress = @current_sec while playing
+        break unless repeat
+        reset
       end
+
       stop
     rescue BufferingTimeoutError
       abort '[ERROR] Buffering timeout'
+    end
+
+    def reset
+      @player.scrub(0)
+      @player.resume
+
+      @progressbar.reset
+      @progressbar.resume
     end
 
     def stop

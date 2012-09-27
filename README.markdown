@@ -64,6 +64,16 @@ AirPlay: http://10.0.1.13:7070 to Apple TV(10.0.1.18)
 ```
 
 
+### Repeat play
+
+```sh
+$ airplayer play ./video.mp4 --repeat
+AirPlay: http://10.0.1.13:7070 to Apple TV(10.0.1.18)
+   Time: 00:00:31 |=====================                         | 50% Streaming
+```
+
+
+
 LICENSE
 --------------------------------------------------------------------------------
 
