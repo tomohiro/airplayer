@@ -24,30 +24,12 @@ module AirPlayer
     end
 
     def play(target, repeat = false)
-      path = File.expand_path(target)
-      if local_file? path
-        video_server = AirPlayer::Server.new(path)
-        uri = video_server.uri
-        Thread.start { video_server.start }
-      else
-        uri = URI.encode(target)
-      end
-
-      device = @airplay.browse.first
-      puts "AirPlay: #{uri} to #{device.name}(#{device.ip})"
-      @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t', :title => :Waiting)
-      @player = @airplay.send_video(uri)
-
       loop do
-        buffering
-        @progressbar.progress = @current_sec while playing
+        glob(target) do |video|
+          send_play video
+        end
         break unless repeat
-        reset
       end
-
-      stop
-    rescue BufferingTimeoutError
-      abort '[ERROR] Buffering timeout'
     end
 
     def reset
@@ -67,9 +49,57 @@ module AirPlayer
         @progressbar.title = :Complete
         @progressbar.finish
       end
+
+      unless @video_server.nil?
+        @video_server.stop
+      end
     end
 
     private
+      def glob(target)
+        path = File.expand_path(target)
+        if local_file? path
+          yield path if !File.directory? path
+          Dir.glob("#{path}/**/*").sort.each do |ph|
+            yield ph if !File.directory? ph
+          end
+        else
+          yield target
+        end
+      end
+
+      def send_play(path)
+        progress access_uri path
+        stop
+      rescue BufferingTimeoutError
+        abort '[ERROR] Buffering timeout'
+      end
+
+      def progress(uri)
+        puts "AirPlay: #{uri} to #{device.name}(#{device.ip})"
+        @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t', :title => :Waiting)
+        @player = @airplay.send_video(uri)
+p
+        buffering
+        @progressbar.progress = @current_sec while playing
+      end
+
+      def access_uri(path)
+        if local_file? path
+          @video_server = AirPlayer::Server.new(path)
+          uri = @video_server.uri
+          Thread.start { @video_server.start }
+        else
+          uri = URI.encode(path)
+        end
+
+        uri
+      end
+
+      def device
+        @airplay.browse.first
+      end
+
       def local_file?(path)
         File.exist? path
       end
