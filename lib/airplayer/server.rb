@@ -18,6 +18,10 @@ module AirPlayer
       $stderr = STDERR
     end
 
+    def stop
+      @server.server.shutdown 
+    end
+
     # networking - Getting the Hostname or IP in Ruby on Rails - Stack Overflow
     #   http://stackoverflow.com/questions/42566/getting-the-hostname-or-ip-in-ruby-on-rails
     def local_ip
