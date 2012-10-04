@@ -9,13 +9,11 @@ module AirPlayer
 
     def self.play(*opts)
       new.play(*opts)
-    rescue Airplay::Client::ServerNotFoundError
-      abort '[ERROR] Apple device not found'
     end
 
     def initialize
       @airplay      = Airplay::Client.new
-      @playlist     = Playlist.new
+      @device       = @airplay.browse.first
       @player       = nil
       @video_server = nil
       @progressbar  = nil
@@ -23,17 +21,31 @@ module AirPlayer
       @interval     = 1
       @total_sec    = 0
       @current_sec  = 0
+    rescue Airplay::Client::ServerNotFoundError
+      abort '[ERROR] Apple device not found'
     end
 
     def play(target, repeat = false)
-      @playlist.add(target)
-      loop do
-        @playlist.entries do |video|
-          progress(access_uri(video))
-          pause
-        end
-        break unless repeat
+      path = File.expand_path(target)
+      if File.exist? path
+        @video_server = AirPlayer::Server.new(path)
+        @video_server.start
+        uri = @video_server.uri
+      else
+        uri = URI.encode(target)
       end
+
+      puts "AirPlay: #{uri} to #{@device.name}(#{@device.ip})"
+      @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
+      @player = @airplay.send_video(uri)
+
+      loop do
+        buffering
+        @progressbar.progress = @current_sec while playing
+        break unless repeat
+        reset
+      end
+      pause
     rescue BufferingTimeoutError
       abort '[ERROR] Buffering timeout'
     end
@@ -62,29 +74,6 @@ module AirPlayer
     end
 
     private
-      def progress(uri)
-        puts "AirPlay: #{uri} to #{device.name}(#{device.ip})"
-        @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
-        @player = @airplay.send_video(uri)
-
-        buffering
-        @progressbar.progress = @current_sec while playing
-      end
-
-      def access_uri(path)
-        if File.exist? path
-          @video_server = AirPlayer::Server.new(path)
-          @video_server.start
-          uri = @video_server.uri
-        else
-          uri = URI.encode(path)
-        end
-      end
-
-      def device
-        @airplay.browse.first
-      end
-
       def buffering
         timeout @timeout, BufferingTimeoutError do
           @progressbar.title = :Buffering until playing
