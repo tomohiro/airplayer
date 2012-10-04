@@ -4,11 +4,7 @@ module AirPlayer
 
     def add(item)
       path = File.expand_path(item)
-      if Dir.exists? path
-        concat(media_in(path))
-      else
-        push(Media.new(item))
-      end
+      Dir.exists?(path) ? concat(media_in(path)) : push(Media.new(item))
       self
     end
 
