@@ -9,13 +9,12 @@ module AirPlayer
       playlist   = Playlist.new
       playlist.add(target)
 
-      if Dir.exists?(target)
-        abort '[ERROR] Sorry, repeat option(-r,--repeat) is not supported.' if options.repeat?
-        playlist.entries do |file|
-          controller.play(file)
-        end
-      else
-        controller.play(playlist.first, options.repeat?)
+      if playlist.size > 1 and options.repeat?
+        abort '[ERROR] Repeat option(-r, --repeat) is not supported.'
+      end
+
+      playlist.entries do |media|
+        controller.play(media, options.repeat)
       end
     end
 
