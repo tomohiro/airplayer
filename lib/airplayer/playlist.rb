@@ -22,7 +22,6 @@ module AirPlayer
       end
 
       def files_in(path)
-        return [] unless Dir.exists? path
         Dir.entries(path).map do |node|
           File.expand_path(node) if File.file? node
         end.compact
