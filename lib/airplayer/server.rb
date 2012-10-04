@@ -12,12 +12,10 @@ module AirPlayer
     end
 
     def start
-      Thread.start do
-        # Output WEBrick access log to file
-        $stderr = File.open(Logger.path, File::WRONLY | File::APPEND | File::CREAT)
-        @server.start
-        $stderr = STDERR
-      end
+      # Output WEBrick access log to file
+      $stderr = File.open(Logger.path, File::WRONLY | File::APPEND | File::CREAT)
+      @server.start
+      $stderr = STDERR
     end
 
     def stop
