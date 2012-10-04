@@ -7,10 +7,6 @@ module AirPlayer
     BufferingTimeoutError = Class.new(TimeoutError)
     MediaTypeError        = Class.new(TypeError)
 
-    def self.play(*opts)
-      new.play(*opts)
-    end
-
     def initialize
       @airplay      = Airplay::Client.new
       @device       = @airplay.browse.first
@@ -26,7 +22,11 @@ module AirPlayer
 
     def play(media, repeat = false)
       raise MediaTypeError unless media.respond_to?(:open)
-      puts "AirPlay: #{media.path} to #{@device.name}(#{@device.ip})"
+
+      puts "\n Source: #{media.path}"
+      puts "  Title: #{media.title}"
+      puts " Device: #{@device.name}(#{@device.ip})"
+
       @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
       @player = @airplay.send_video(media.open)
 
@@ -35,7 +35,7 @@ module AirPlayer
         @progressbar.progress = @current_sec while playing
         @progressbar.title = :Complete
         break unless repeat
-        reset
+        replay
       end
       pause
       media.close
@@ -50,7 +50,7 @@ module AirPlayer
       @progressbar.finish if @progressbar
     end
 
-    def reset
+    def replay
       @player.scrub(0)
       @player.resume
 
