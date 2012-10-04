@@ -14,7 +14,6 @@ module AirPlayer
           controller.play(file)
         end
       else
-        playlist.add(target)
         controller.play(target, options.repeat?)
       end
     end
