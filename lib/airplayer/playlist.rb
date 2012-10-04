@@ -4,26 +4,19 @@ module AirPlayer
 
     def add(item)
       path = File.expand_path(item)
-      if local_path?(path)
-        directory?(path) ? concat(files_in(path)) : push(path)
+      if Dir.exists? path
+        concat(media_in(path))
       else
-        push(item)
+        push(Media.new(item))
       end
       self
     end
 
     private
-      def local_path?(path)
-        File.exist? path
-      end
-
-      def directory?(path)
-        Dir.exists? path
-      end
-
-      def files_in(path)
+      def media_in(path)
         Dir.entries(path).map do |node|
-          File.expand_path(node) if File.file? node
+          media_path = File.expand_path(node, path)
+          Media.new(media_path) if File.file? media_path
         end.compact
       end
   end

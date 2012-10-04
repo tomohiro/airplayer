@@ -1,11 +1,11 @@
 require 'timeout'
-require 'uri'
 require 'airplay'
 require 'airplayer/progress_bar/base'
 
 module AirPlayer
   class Controller
     BufferingTimeoutError = Class.new(TimeoutError)
+    MediaTypeError        = Class.new(TypeError)
 
     def self.play(*opts)
       new.play(*opts)
@@ -15,7 +15,6 @@ module AirPlayer
       @airplay      = Airplay::Client.new
       @device       = @airplay.browse.first
       @player       = nil
-      @video_server = nil
       @progressbar  = nil
       @timeout      = 30
       @interval     = 1
@@ -25,44 +24,30 @@ module AirPlayer
       abort '[ERROR] Apple device not found'
     end
 
-    def play(target, repeat = false)
-      path = File.expand_path(target)
-      if File.exist? path
-        @video_server = AirPlayer::Server.new(path)
-        @video_server.start
-        uri = @video_server.uri
-      else
-        uri = URI.encode(target)
-      end
-
-      puts "AirPlay: #{uri} to #{@device.name}(#{@device.ip})"
+    def play(media, repeat = false)
+      raise MediaTypeError unless media.respond_to?(:open)
+      puts "AirPlay: #{media.path} to #{@device.name}(#{@device.ip})"
       @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
-      @player = @airplay.send_video(uri)
+      @player = @airplay.send_video(media.open)
 
       loop do
         buffering
         @progressbar.progress = @current_sec while playing
+        @progressbar.title = :Complete
         break unless repeat
         reset
       end
       pause
+      media.close
     rescue BufferingTimeoutError
       abort '[ERROR] Buffering timeout'
+    rescue MediaTypeError
+      abort '[ERROR] Not supported media type'
     end
 
     def pause
-      unless @player.nil?
-        @player.stop
-      end
-
-      unless @progressbar.nil?
-        @progressbar.title = :Complete
-        @progressbar.finish
-      end
-
-      unless @video_server.nil?
-        @video_server.stop
-      end
+      @player.stop        if @player
+      @progressbar.finish if @progressbar
     end
 
     def reset

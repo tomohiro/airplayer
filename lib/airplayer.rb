@@ -7,4 +7,5 @@ module AirPlayer
   autoload :Controller, 'airplayer/controller'
   autoload :Server,     'airplayer/server'
   autoload :Playlist,   'airplayer/playlist'
+  autoload :Media,      'airplayer/media'
 end
