@@ -2,8 +2,9 @@ require 'rubygems'
 require 'airplayer/version'
 
 module AirPlayer
-  autoload :Logger, 'airplayer/logger'
-  autoload :App,    'airplayer/app'
-  autoload :Player, 'airplayer/player'
-  autoload :Server, 'airplayer/server'
+  autoload :Logger,     'airplayer/logger'
+  autoload :App,        'airplayer/app'
+  autoload :Controller, 'airplayer/controller'
+  autoload :Server,     'airplayer/server'
+  autoload :Playlist,   'airplayer/playlist'
 end

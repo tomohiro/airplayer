@@ -4,7 +4,7 @@ require 'airplay'
 require 'airplayer/progress_bar/base'
 
 module AirPlayer
-  class Player
+  class Controller
     BufferingTimeoutError = Class.new(TimeoutError)
 
     def self.play(*opts)
@@ -14,33 +14,31 @@ module AirPlayer
     end
 
     def initialize
-      @airplay     = Airplay::Client.new
-      @player      = nil
-      @progressbar = nil
-      @timeout     = 30
-      @interval    = 1
-      @total_sec   = 0
-      @current_sec = 0
+      @airplay      = Airplay::Client.new
+      @playlist     = Playlist.new
+      @player       = nil
+      @video_server = nil
+      @progressbar  = nil
+      @timeout      = 30
+      @interval     = 1
+      @total_sec    = 0
+      @current_sec  = 0
     end
 
     def play(target, repeat = false)
+      @playlist.add(target)
       loop do
-        glob(target) do |video|
-          send_play video
+        @playlist.entries do |video|
+          progress(access_uri(video))
+          pause
         end
         break unless repeat
       end
+    rescue BufferingTimeoutError
+      abort '[ERROR] Buffering timeout'
     end
 
-    def reset
-      @player.scrub(0)
-      @player.resume
-
-      @progressbar.reset
-      @progressbar.resume
-    end
-
-    def stop
+    def pause
       unless @player.nil?
         @player.stop
       end
@@ -55,29 +53,18 @@ module AirPlayer
       end
     end
 
+    def reset
+      @player.scrub(0)
+      @player.resume
+
+      @progressbar.reset
+      @progressbar.resume
+    end
+
     private
-      def glob(target)
-        path = File.expand_path(target)
-        if local_file? path
-          yield path if !File.directory? path
-          Dir.glob("#{path}/**/*").sort.each do |ph|
-            yield ph if !File.directory? ph
-          end
-        else
-          yield target
-        end
-      end
-
-      def send_play(path)
-        progress access_uri path
-        stop
-      rescue BufferingTimeoutError
-        abort '[ERROR] Buffering timeout'
-      end
-
       def progress(uri)
         puts "AirPlay: #{uri} to #{device.name}(#{device.ip})"
-        @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t', :title => :Waiting)
+        @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
         @player = @airplay.send_video(uri)
 
         buffering
@@ -85,34 +72,24 @@ module AirPlayer
       end
 
       def access_uri(path)
-        if local_file? path
+        if File.exist? path
           @video_server = AirPlayer::Server.new(path)
+          @video_server.start
           uri = @video_server.uri
-          Thread.start { @video_server.start }
         else
           uri = URI.encode(path)
         end
-
-        uri
       end
 
       def device
         @airplay.browse.first
       end
 
-      def local_file?(path)
-        File.exist? path
-      end
-
       def buffering
         timeout @timeout, BufferingTimeoutError do
-          loop do
-            playing
-            redo unless buffering?
-            @progressbar.title = :Streaming
-            @progressbar.total = @total_sec
-            break
-          end
+          @progressbar.title = :Buffering until playing
+          @progressbar.title = :Streaming
+          @progressbar.total = @total_sec
         end
       end
 
@@ -126,10 +103,6 @@ module AirPlayer
 
       def progress?
         0 < @current_sec && @current_sec < @total_sec
-      end
-
-      def buffering?
-        0 < @total_sec && 0 < @current_sec
       end
   end
 end
