@@ -25,7 +25,7 @@ module AirPlayer
 
       puts "\n Source: #{media.path}"
       puts "  Title: #{media.title}"
-      puts " Device: #{@device.name}(#{@device.ip})"
+      puts " Device: #{@device.name} (#{@device.ip})"
 
       @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
       @player = @airplay.send_video(media.open)
