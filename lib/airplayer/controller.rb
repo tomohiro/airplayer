@@ -5,7 +5,6 @@ require 'airplayer/progress_bar/base'
 module AirPlayer
   class Controller
     BufferingTimeoutError = Class.new(TimeoutError)
-    MediaTypeError        = Class.new(TypeError)
 
     def initialize
       @airplay      = Airplay::Client.new
@@ -20,29 +19,22 @@ module AirPlayer
       abort '[ERROR] Apple device not found'
     end
 
-    def play(media, repeat = false)
-      raise MediaTypeError unless media.respond_to?(:open)
+    def play(media)
+      raise TypeError unless media.kind_of? Media
 
-      puts "\n Source: #{media.path}"
-      puts "  Title: #{media.title}"
-      puts " Device: #{@device.name} (#{@device.ip})"
-
-      @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
+      display_information(media)
       @player = @airplay.send_video(media.open)
 
-      loop do
-        buffering
-        @progressbar.progress = @current_sec while playing
-        @progressbar.title = :Complete
-        break unless repeat
-        replay
-      end
+      buffering
+      @progressbar.progress = @current_sec while playing
+      @progressbar.title = :Complete
+
       pause
       media.close
     rescue BufferingTimeoutError
       abort '[ERROR] Buffering timeout'
-    rescue MediaTypeError
-      abort '[ERROR] Not supported media type'
+    rescue TypeError
+      abort '[ERROR] Not media class'
     end
 
     def pause
@@ -59,6 +51,15 @@ module AirPlayer
     end
 
     private
+      def display_information(media)
+        puts
+        puts " Source: #{media.path}"
+        puts "  Title: #{media.title}"
+        puts " Device: #{@device.name} (#{@device.ip})"
+
+        @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
+      end
+
       def buffering
         timeout @timeout, BufferingTimeoutError do
           @progressbar.title = :Buffering until playing

@@ -6,15 +6,8 @@ module AirPlayer
     method_option :repeat, :aliases => '-r', :desc => 'Repeat play', :type => :boolean
     def play(target)
       controller = Controller.new
-      playlist   = Playlist.new
-      playlist.add(target)
-
-      if playlist.size > 1 and options.repeat?
-        abort '[ERROR] Repeat option(-r, --repeat) is not supported.'
-      end
-
-      playlist.entries do |media|
-        controller.play(media, options.repeat)
+      Playlist.new.add(target).entries(options.repeat) do |media|
+        controller.play(media)
       end
     end
 

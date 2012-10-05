@@ -1,11 +1,16 @@
 module AirPlayer
   class Playlist < Array
-    alias :entries :each
-
     def add(item)
       path = File.expand_path(item)
       Dir.exists?(path) ? concat(media_in(path)) : push(Media.new(item))
       self
+    end
+
+    def entries(repeat = false, &blk)
+      loop do
+        send(:each, &blk)
+        break unless repeat
+      end
     end
 
     private
