@@ -19,14 +19,20 @@ module AirPlayer
     end
 
     def open
-      if @type == :file
-        Thread.start { @video_server.start }
-      end
+      Thread.start { @video_server.start } if file?
       @path
     end
 
     def close
-      @video_server.stop if @type == :local
+      @video_server.stop if file?
+    end
+
+    def file?
+      @type == :file
+    end
+
+    def url?
+      @type == :url
     end
   end
 end
