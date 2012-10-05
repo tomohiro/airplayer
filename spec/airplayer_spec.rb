@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe :AirPlayer do
-  let(:app) { AirPlayer::App.new }
-
   context :App do
+    let(:app) { AirPlayer::App.new }
+
     it 'class type is Thor' do
       expect(app).to be_kind_of Thor
     end
@@ -20,24 +20,26 @@ describe :AirPlayer do
   context :Media do
     it 'give to local file' do
       media = AirPlayer::Media.new('./Gemfile')
-      expect(media.type).to eq :file
+      expect(media.file?).to be_true
     end
     it 'give to url' do
       media = AirPlayer::Media.new('http://example.com/video.mp4')
-      expect(media.type).to eq :url
+      expect(media.url?).to be_true
     end 
   end
 
   context :Playlist do
     let(:playlist) { AirPlayer::Playlist.new }
 
-    it 'add URL to list, and that is match http://..' do
-      expect(playlist.add('http://example.com/video.mp4').first.path).to match 'http'
+    it 'add URL to list, and that media type is url' do
+      playlist.add('http://example.com/video.mp4')
+      expect(playlist.first.path).to match 'http'
     end
 
-    it 'add file to list, and that is match /airplayer/' do
+    it 'add file to list, and that media type is file' do
       expect(playlist.add('./LICENSE').size).to eq 1
       expect(playlist.add('./Gemfile').size).to eq 2
+      expect(playlist.first.file?).to be_true
     end
 
     it 'has list contains url or file path' do
