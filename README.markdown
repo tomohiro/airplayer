@@ -15,6 +15,7 @@ Command-line AirPlay video client for Apple TV
 Requirements
 -------------------------------------------------------------------------------
 
+- OSX or Ubuntu
 - Ruby 1.9.2 or later
 - AppleTV 2G or later
 
@@ -50,28 +51,51 @@ Usage
 ### Play online video
 
 ```sh
-$ airplayer play http://example.com/my-video.mp4
-AirPlay: http://example.com/my-video.mp4 to Apple TV(10.0.1.18)
-   Time: 00:00:31 |==============================================| 100% Complete
+$ airplayer play http://heinlein.local/Movies/AKIRA.m4v
+
+ Source: http://heinlein.local/misc/Movies/AKIRA.m4v
+  Title: AKIRA.m4v
+ Device: Apple TV (10.0.1.2)
+   Time: 00:04:25 |=                                              | 3% Streaming
 ```
 
-### Play local video
+### Play video
 
 ```sh
-$ airplayer play $HOME/Movies/video.mp4
-AirPlay: http://10.0.1.13:7070 to Apple TV(10.0.1.18)
-   Time: 00:00:31 |==============================================| 100% Complete
+$ airplayer play '~/Movies/Trailers/007 SKYFALL.mp4'
+
+ Source: http://10.0.1.6:7070
+  Title: SKYFALL.mp4
+ Device: Apple TV (10.0.1.2)
+   Time: 00:00:20 |=====                                         | 11% Streaming
 ```
 
+### Play all video in directory
+
+```sh
+$ airplayer play play ~/Movies/Trailers
+
+ Source: http://10.0.1.6:7070
+  Title: 007 Casino Royale.mp4
+ Device: Apple TV (10.0.1.2)
+   Time: 00:02:33 |==============================================| 100% Complete
+
+ Source: http://10.0.1.6:7070
+  Title: 007 Quantum Of Solace.mp4
+ Device: Apple TV (10.0.1.2)
+   Time: 00:02:01 |==============================================| 100% Complete
+
+ Source: http://10.0.1.6:7070
+  Title: 007 SKYFALL.mp4
+ Device: Apple TV (10.0.1.2)
+   Time: 00:02:36 |==============================================| 100% Complete
+```
 
 ### Repeat play
 
 ```sh
-$ airplayer play ./video.mp4 --repeat
-AirPlay: http://10.0.1.13:7070 to Apple TV(10.0.1.18)
-   Time: 00:00:31 |=====================                         | 50% Streaming
+$ airplayer play '~/Movies/Trailers/007 SKYFALL.mp4' --repeat
 ```
-
 
 
 LICENSE
