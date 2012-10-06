@@ -27,8 +27,8 @@ module AirPlayer
 
       buffering
       @progressbar.progress = @current_sec while playing
-      @progressbar.title = :Complete
 
+      @progressbar.title = :Complete
       pause
       media.close
     rescue BufferingTimeoutError
