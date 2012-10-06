@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airplayer (0.0.2)
+    airplayer (0.0.3)
       airplay
       rack
       ruby-progressbar
