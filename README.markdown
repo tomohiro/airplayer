@@ -73,7 +73,7 @@ $ airplayer play '~/Movies/Trailers/007 SKYFALL.mp4'
 ### Play all video in directory
 
 ```sh
-$ airplayer play play ~/Movies/Trailers
+$ airplayer play ~/Movies/Trailers
 
  Source: http://10.0.1.6:7070
   Title: 007 Casino Royale.mp4
