@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    airplayer (0.0.3)
+    airplayer (0.0.4)
       airplay
+      mime-types
       rack
       ruby-progressbar
       thor
@@ -23,6 +24,7 @@ GEM
       guard (>= 1.1)
       rspec (~> 2.11)
     listen (0.5.3)
+    mime-types (1.19)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
     rack (1.4.1)
