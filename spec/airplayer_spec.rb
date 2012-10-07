@@ -18,6 +18,16 @@ describe :AirPlayer do
   end
 
   context :Media do
+    it 'check supported mime types' do
+      expect(AirPlayer::Media.playable?('007 SKYFALL.mp4')).to be_true
+      expect(AirPlayer::Media.playable?('007 SKYFALL.ts')).to be_true
+      expect(AirPlayer::Media.playable?('007 SKYFALL.m4v')).to be_true
+      expect(AirPlayer::Media.playable?('007 SKYFALL.mov')).to be_true
+      expect(AirPlayer::Media.playable?('007 SKYFALL.ts')).to be_true
+      expect(AirPlayer::Media.playable?('007 SKYFALL.flv')).to be_false
+      expect(AirPlayer::Media.playable?('007 SKYFALL.wmv')).to be_false
+      expect(AirPlayer::Media.playable?('.DS_Store')).to be_false
+    end
     it 'give to local file' do
       media = AirPlayer::Media.new('./Gemfile')
       expect(media.file?).to be_true

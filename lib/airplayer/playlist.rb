@@ -17,7 +17,7 @@ module AirPlayer
       def media_in(path)
         Dir.entries(path).map do |node|
           media_path = File.expand_path(node, path)
-          Media.new(media_path) if File.file? media_path
+          Media.new(media_path) if Media.playable? media_path
         end.compact
       end
   end
