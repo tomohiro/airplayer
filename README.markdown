@@ -98,6 +98,19 @@ $ airplayer play '~/Movies/Trailers/007 SKYFALL.mp4' --repeat
 ```
 
 
+Supported MIME types
+--------------------------------------------------------------------------------
+
+[AirPlay Overview - Configuring Your Server](http://developer.apple.com/library/ios/#documentation/AudioVideo/Conceptual/AirPlayGuide/PreparingYourMediaforAirPlay/PreparingYourMediaforAirPlay.html)
+
+File extension | MIME type       | Ruby `mime-types`
+-------------- | --------------- | -----------------------------
+.ts            | video/MP2T      | video/MP2T
+.mov           | video/quicktime | video/quicktime
+.m4v           | video/mpeg4     | video/vnd.objectvideo
+.mp4           | video/mpeg4     | application/mp4, video/mp4
+
+
 LICENSE
 --------------------------------------------------------------------------------
 
