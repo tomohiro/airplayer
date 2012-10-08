@@ -1,8 +1,8 @@
 module AirPlayer
   class Playlist < Array
-    def add(item)
+    def add(item, shuffle = false)
       path = File.expand_path(item)
-      Dir.exists?(path) ? concat(media_in(path)) : push(Media.new(item))
+      Dir.exists?(path) ? concat(media_in(path, shuffle)) : push(Media.new(item))
       self
     end
 
@@ -14,8 +14,9 @@ module AirPlayer
     end
 
     private
-      def media_in(path)
-        Dir.entries(path).map do |node|
+      def media_in(path, shuffle = false)
+        medias = shuffle ? Dir.entries(path).shuffle! : Dir.entries(path)
+        medias.map do |node|
           media_path = File.expand_path(node, path)
           Media.new(media_path) if Media.playable? media_path
         end.compact
