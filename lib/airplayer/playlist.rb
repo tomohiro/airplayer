@@ -1,6 +1,6 @@
 module AirPlayer
   class Playlist < Array
-    def initialize(options)
+    def initialize(options = {})
       @shuffle = options['shuffle'] || false
       @repeat  = options['repeat']  || false
     end
