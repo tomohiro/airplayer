@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airplayer (0.0.4)
+    airplayer (0.0.5)
       airplay
       mime-types
       rack
