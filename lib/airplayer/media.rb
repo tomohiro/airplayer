@@ -44,7 +44,7 @@ module AirPlayer
     end
 
     def open
-      Thread.start { @video_server.start } if file?
+      @video_server.start if file?
       @path
     end
 
