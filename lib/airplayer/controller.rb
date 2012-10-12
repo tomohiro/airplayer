@@ -20,7 +20,7 @@ module AirPlayer
     end
 
     def play(media)
-      raise TypeError unless media.kind_of? Media
+      raise TypeError unless media.is_a? Media
 
       display_information(media)
       @player = @airplay.send_video(media.open)
@@ -35,6 +35,8 @@ module AirPlayer
       abort '[ERROR] Buffering timeout'
     rescue TypeError
       abort '[ERROR] Not media class'
+    rescue
+      abort "Play stopped"
     end
 
     def pause
