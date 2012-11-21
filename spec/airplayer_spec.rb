@@ -46,6 +46,13 @@ describe :AirPlayer do
       expect(playlist.first.path).to match 'http'
     end
 
+    it 'add Podcast rss to list' do
+      playlist.add('http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml')
+      playlist.entries do |media|
+        expect(media).to be_kind_of AirPlayer::Media
+      end
+    end
+
     it 'add file to list, and that media type is file' do
       expect(playlist.add('./LICENSE').size).to eq 1
       expect(playlist.add('./Gemfile').size).to eq 2

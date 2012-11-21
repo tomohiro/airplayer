@@ -1,3 +1,6 @@
+require 'rss'
+require 'nokogiri'
+
 module AirPlayer
   class Playlist < Array
     def initialize(options = {})
@@ -6,8 +9,14 @@ module AirPlayer
     end
 
     def add(item)
-      path = File.expand_path(item)
-      Dir.exists?(path) ? concat(media_in(path)) : push(Media.new(item))
+      case type(item)
+      when :local
+        concat(media_in_local(item))
+      when :podcast
+        concat(media_in_podcast(item))
+      when :url
+        push(Media.new(item))
+      end
       self
     end
 
@@ -20,10 +29,26 @@ module AirPlayer
     end
 
     private
-      def media_in(path)
-        Dir.entries(path).sort.map do |node|
+      def type(item)
+        if Dir.exists?(File.expand_path(item))
+          :local
+        elsif RSS::Parser.parse(open(item))
+          :podcast
+        else
+          :url
+        end
+      end
+
+      def media_in_local(path)
+        Dir.entries(File.expand_path(path)).sort.map do |node|
           Media.new(File.expand_path(node, path)) if Media.playable? node
         end.compact
+      end
+
+      def media_in_podcast(path)
+        Nokogiri::XML(open(path)).search('enclosure').map do |node|
+          Media.new(node.attributes['url'].text)
+        end
       end
   end
 end

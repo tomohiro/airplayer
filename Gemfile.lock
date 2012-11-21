@@ -4,6 +4,7 @@ PATH
     airplayer (0.0.5)
       airplay
       mime-types
+      nokogiri
       rack
       ruby-progressbar
       thor
@@ -27,6 +28,7 @@ GEM
     mime-types (1.19)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.8)
+    nokogiri (1.5.5)
     rack (1.4.1)
     rake (0.9.2.2)
     rspec (2.11.0)
