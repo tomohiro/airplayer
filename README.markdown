@@ -16,7 +16,7 @@ Requirements
 -------------------------------------------------------------------------------
 
 - OSX or Ubuntu
-- Ruby 1.9.2 or later
+- Ruby 1.9.3 or later
 - AppleTV 2G or later
 
 
@@ -93,8 +93,23 @@ $ airplayer play ~/Movies/Trailers
 
 ### Repeat play
 
+Repeat one
+
 ```sh
 $ airplayer play '~/Movies/Trailers/007 SKYFALL.mp4' --repeat
+```
+
+Repeat all
+
+```sh
+$ airplayer play '~/Movies/Trailers' --repeat
+```
+
+
+### Shuffle play
+
+```sh
+$ airplayer play '~/Movies/Trailers' --shuffle
 ```
 
 
