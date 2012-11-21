@@ -54,9 +54,8 @@ describe :AirPlayer do
     end
 
     it 'add file to list, and that media type is file' do
-      expect(playlist.add('./LICENSE').size).to eq 1
-      expect(playlist.add('./Gemfile').size).to eq 2
-      expect(playlist.first.file?).to be_true
+      expect(playlist.add('./video.mp4').size).to eq 1
+      expect(playlist.add('./video.m4v').size).to eq 2
     end
 
     it 'has list contains url or file path' do

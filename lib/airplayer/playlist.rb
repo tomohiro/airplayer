@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rss'
 require 'nokogiri'
 
@@ -32,10 +34,10 @@ module AirPlayer
       def type(item)
         if Dir.exists?(File.expand_path(item))
           :local
+        elsif Media.playable? item
+          :url
         elsif RSS::Parser.parse(open(item))
           :podcast
-        else
-          :url
         end
       end
 
