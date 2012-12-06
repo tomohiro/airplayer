@@ -91,6 +91,20 @@ $ airplayer play ~/Movies/Trailers
    Time: 00:02:36 |==============================================| 100% Complete
 ```
 
+### Play video podcast()
+
+Example: CNN video podcast
+
+```sh
+$ airplayer play http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml
+
+ Source: http://rss.cnn.com/~r/services/podcasting/cnnnewsroom/rss/~5/z7DirHubdP0/exp-travel-insider-hilton-head-island.cnn.m4v
+  Title: exp-travel-insider-hilton-head-island.cnn.m4v
+ Device: Apple TV (10.0.1.2)
+   Time: 00:00:44 |============                                  | 39% Streaming
+```
+
+
 ### Repeat play
 
 Repeat one
