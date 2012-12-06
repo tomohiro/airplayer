@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airplayer (0.0.5)
+    airplayer (0.0.6)
       airplay
       mime-types
       nokogiri
