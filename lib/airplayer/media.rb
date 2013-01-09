@@ -10,14 +10,14 @@ module AirPlayer
   # .mov           | video/quicktime | video/quicktime
   # .m4v           | video/mpeg4     | video/vnd.objectvideo
   # .mp4           | video/mpeg4     | application/mp4, video/mp4
-  SUPPORTED_MIME_TYPES = %w[
+  SUPPORTED_MIME_TYPES = %w(
     application/mp4
     video/mp4
     video/vnd.objectvideo
     video/MP2T
     video/quicktime
     video/mpeg4
-  ]
+  )
 
   class Media
     attr_reader :title, :path, :type

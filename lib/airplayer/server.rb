@@ -6,12 +6,7 @@ module AirPlayer
     attr_reader :uri
 
     def initialize(video_path)
-      @server = Rack::Server.new(
-        :server => :webrick,
-        :Host   => local_ip,
-        :Port   => 7070,
-        :app    => Rack::File.new(video_path)
-      )
+      @server = Rack::Server.new(server: :webrick, Host: local_ip, Port: 7070, app: Rack::File.new(video_path))
       @uri  = "http://#{@server.options[:Host]}:#{@server.options[:Port]}"
     end
 
