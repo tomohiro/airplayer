@@ -59,7 +59,7 @@ module AirPlayer
         puts "  Title: #{media.title}"
         puts " Device: #{@device.name} (#{@device.ip})"
 
-        @progressbar = ProgressBar.create(:format => '   %a |%b%i| %p%% %t')
+        @progressbar = ProgressBar.create(format: '   %a |%b%i| %p%% %t')
       end
 
       def buffering
