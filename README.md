@@ -92,7 +92,7 @@ $ airplayer play ~/Movies/Trailers
    Time: 00:02:36 |==============================================| 100% Complete
 ```
 
-### Play video podcast()
+### Play video podcast XML
 
 Example: CNN video podcast
 
