@@ -4,10 +4,10 @@ AirPlayer
 Command-line AirPlay video client for Apple TV
 
 [![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer)
-[![Build Status](https://secure.travis-ci.org/Tomohiro/airplayer.png)](https://secure.travis-ci.org/Tomohiro/airplayer)
+[![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer)
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
+[![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Tomohiro/airplayer)
-[![endorse](http://api.coderwall.com/tomohiro/endorsecount.png)](http://coderwall.com/tomohiro)
 
 
 ---
@@ -144,6 +144,6 @@ File extension | MIME type       | Ruby `mime-types`
 LICENSE
 --------------------------------------------------------------------------------
 
-&copy; 2013 Tomohiro, TAIRA.
+&copy; 2013 Tomohiro TAIRA.
 This project is licensed under the MIT license.
 See LICENSE for details.
