@@ -79,7 +79,7 @@ module AirPlayer
       end
 
       def progress?
-        0 < @current_sec && @current_sec < @total_sec
+        0 < @current_sec && @total_sec - @current_sec > 1
       end
   end
 end
