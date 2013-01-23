@@ -71,7 +71,7 @@ $ airplayer play '~/Movies/Trailers/007 SKYFALL.mp4'
    Time: 00:00:20 |=====                                         | 11% Streaming
 ```
 
-### Play all video in directory
+### Play all video in specific directory
 
 ```sh
 $ airplayer play ~/Movies/Trailers
