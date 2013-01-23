@@ -42,7 +42,7 @@ $ gem install airplayer
 ```sh
 $ git clone git://github.com/Tomohiro/airplayer.git
 $ cd airplayer
-$ bundle install --path vendor/bundle
+$ bundle install --deployment
 ```
 
 
@@ -144,6 +144,6 @@ File extension | MIME type       | Ruby `mime-types`
 LICENSE
 --------------------------------------------------------------------------------
 
-&copy; 2013 Tomohiro TAIRA.
+&copy; 2012 - 2013 Tomohiro TAIRA.
 This project is licensed under the MIT license.
 See LICENSE for details.
