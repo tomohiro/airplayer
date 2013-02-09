@@ -28,14 +28,21 @@ describe :AirPlayer do
       expect(AirPlayer::Media.playable?('007 SKYFALL.wmv')).to be_false
       expect(AirPlayer::Media.playable?('.DS_Store')).to be_false
     end
+
     it 'give to local file' do
       media = AirPlayer::Media.new('./Gemfile')
       expect(media.file?).to be_true
     end
+
     it 'give to url' do
       media = AirPlayer::Media.new('http://example.com/video.mp4')
       expect(media.url?).to be_true
-    end 
+    end
+
+    it 'give to YouTube url' do
+      media = AirPlayer::Media.new('http://www.youtube.com/watch?v=gVNYm9Qncyc')
+      expect(media.url?).to be_true
+    end
   end
 
   context :Playlist do

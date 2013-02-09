@@ -19,20 +19,26 @@ module AirPlayer
     video/mpeg4
   )
 
+  SUPPORTED_DOMAINS = %w(
+    youtube
+  )
+
   class Media
     attr_reader :title, :path, :type
 
     def initialize(target)
-      path   = File.expand_path(target)
-      @title = File.basename(path)
+      path = File.expand_path(target)
 
       if File.exist? path
         @video_server = AirPlayer::Server.new(path)
-        @path = @video_server.uri
-        @type = :file
+        @path  = @video_server.uri
+        @title = File.basename(path)
+        @type  = :file
       else
-        @path = URI.encode(target)
-        @type = :url
+        uri = URI.encode(target)
+        @path  = online_media_path(uri)
+        @title = online_media_title(uri)
+        @type  = :url
       end
     end
 
@@ -40,6 +46,12 @@ module AirPlayer
       MIME::Types.type_for(path).each do |mimetype|
         return SUPPORTED_MIME_TYPES.include? mimetype
       end
+
+      host = URI.parse(path).host
+      SUPPORTED_DOMAINS.each do |domain|
+        return host =~ /#{domain}/
+      end
+
       false
     end
 
@@ -59,5 +71,24 @@ module AirPlayer
     def url?
       @type == :url
     end
+
+    private
+      def online_media_path(uri)
+        case URI.parse(uri).host
+        when /youtube/
+          uri = %x{youtube-dl -g #{uri}}
+        else
+          uri
+        end
+      end
+
+      def online_media_title(uri)
+        case URI.parse(uri).host
+        when /youtube/
+          title = %x{youtube-dl -e #{uri}}
+        else
+          title
+        end
+      end
   end
 end
