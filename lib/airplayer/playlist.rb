@@ -12,7 +12,7 @@ module AirPlayer
 
     def add(item)
       case type(item)
-      when :local
+      when :local_dir
         concat(media_in_local(item))
       when :podcast
         concat(media_in_podcast(item))
@@ -33,7 +33,7 @@ module AirPlayer
     private
       def type(item)
         if Dir.exists?(File.expand_path(item))
-          :local
+          :local_dir
         elsif Media.playable? item
           :url
         elsif RSS::Parser.parse(open(item))
