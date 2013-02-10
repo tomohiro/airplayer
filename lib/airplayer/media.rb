@@ -76,7 +76,7 @@ module AirPlayer
       def online_media_path(uri)
         case URI.parse(uri).host
         when /youtube/
-          uri = %x{youtube-dl -g #{uri}}
+          uri = `youtube-dl -g #{uri}`
         else
           uri
         end
@@ -85,9 +85,9 @@ module AirPlayer
       def online_media_title(uri)
         case URI.parse(uri).host
         when /youtube/
-          title = %x{youtube-dl -e #{uri}}
+          title = `youtube-dl -e #{uri}`
         else
-          title
+          title = File.basename(uri)
         end
       end
   end
