@@ -19,6 +19,7 @@ Requirements
 - OSX or Ubuntu
 - Ruby 1.9.3 or later
 - AppleTV 2G or later
+- [youtube-dl](http://rg3.github.com/youtube-dl/)
 
 
 ### Ubuntu
