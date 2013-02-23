@@ -1,5 +1,4 @@
 require 'timeout'
-require 'airplay'
 require 'airplayer/progress_bar/base'
 
 module AirPlayer
@@ -16,7 +15,7 @@ module AirPlayer
       @total_sec    = 0
       @current_sec  = 0
     rescue Airplay::Client::ServerNotFoundError
-      abort '[ERROR] Apple device not found'
+      abort '[ERROR] AirPlay device is not found'
     end
 
     def play(media)
