@@ -1,11 +1,8 @@
-AirPlayer
+AirPlayer [![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer) [![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer) [![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
 ================================================================================
 
 Command-line AirPlay video client for Apple TV
 
-[![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer)
-[![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer)
-[![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
 [![Code Climate](https://codeclimate.com/github/Tomohiro/airplayer.png)](https://codeclimate.com/github/Tomohiro/airplayer)
 
@@ -104,6 +101,13 @@ $ airplayer play http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml
   Title: exp-travel-insider-hilton-head-island.cnn.m4v
  Device: Apple TV (10.0.1.2)
    Time: 00:00:44 |============                                  | 39% Streaming
+```
+
+
+### Play YouTube video
+
+```sh
+$ airplayer play 'http://www.youtube.com/watch?v=QH2-TGUlwu4'
 ```
 
 
