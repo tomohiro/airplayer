@@ -138,7 +138,7 @@ $ airplayer play '~/Movies/Trailers' --shuffle
 
 If you have multiple "AirPlay" devices, specifying the device number for the following play is available on any device.
 
-Checke the AirPlay device number
+Check the AirPlay device number
 
 ```sh
 $ airplayer devices
