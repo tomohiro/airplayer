@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    airplayer (0.0.6)
-      airplay
+    airplayer (0.0.7)
+      airplay (~> 0.2.9)
       mime-types
       nokogiri
       rack
@@ -57,6 +57,7 @@ PLATFORMS
 
 DEPENDENCIES
   airplayer!
+  bundler
   guard-rspec
   rake
   rspec
