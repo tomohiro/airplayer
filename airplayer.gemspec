@@ -1,28 +1,31 @@
 # encoding: utf-8
-require File.expand_path('../lib/airplayer/version', __FILE__)
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'airplayer/version'
 
-Gem::Specification.new do |gem|
-  gem.name          = 'airplayer'
-  gem.version       = AirPlayer::VERSION
-  gem.authors       = ['Tomohiro, TAIRA']
-  gem.email         = ['tomohiro.t@gmail.com']
-  gem.description   = %q{Command-line AirPlay video client for Apple TV}
-  gem.summary       = %q{Command-line AirPlay video client for Apple TV}
-  gem.homepage      = 'https://github.com/Tomohiro/airplayer'
+Gem::Specification.new do |spec|
+  spec.name          = 'airplayer'
+  spec.version       = AirPlayer::VERSION
+  spec.authors       = ['Tomohiro, TAIRA']
+  spec.email         = ['tomohiro.t@gmail.com']
+  spec.description   = %q{Command-line AirPlay video client for Apple TV}
+  spec.summary       = %q{Command-line AirPlay video client for Apple TV}
+  spec.homepage      = 'https://github.com/Tomohiro/airplayer'
 
-  gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ['lib']
+  spec.files         = `git ls-files`.split($\)
+  spec.executables   = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'thor'
-  gem.add_runtime_dependency 'ruby-progressbar'
-  gem.add_runtime_dependency 'airplay'
-  gem.add_runtime_dependency 'rack'
-  gem.add_runtime_dependency 'mime-types'
-  gem.add_runtime_dependency 'nokogiri'
+  spec.add_runtime_dependency 'thor'
+  spec.add_runtime_dependency 'ruby-progressbar'
+  spec.add_runtime_dependency 'airplay', '~> 0.2.9'
+  spec.add_runtime_dependency 'rack'
+  spec.add_runtime_dependency 'mime-types'
+  spec.add_runtime_dependency 'nokogiri'
 
-  gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'guard-rspec'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'guard-rspec'
 end
