@@ -7,7 +7,6 @@ module AirPlayer
 
     def initialize
       @airplay      = Airplay::Client.new
-      @device       = @airplay.browse.first
       @player       = nil
       @progressbar  = nil
       @timeout      = 30
@@ -18,10 +17,13 @@ module AirPlayer
       abort '[ERROR] AirPlay device is not found'
     end
 
-    def play(media)
+    def play(media, options = {})
       raise TypeError unless media.is_a? Media
 
-      display_information(media)
+      device = select_device(options.fetch(:device, nil))
+      @airplay.use(device.name)
+
+      display_information(device, media)
       @player = @airplay.send_video(media.open)
 
       buffering
@@ -35,7 +37,7 @@ module AirPlayer
     rescue TypeError
       abort '[ERROR] Not media class'
     rescue
-      abort "Play stopped"
+      abort 'Play stopped'
     end
 
     def pause
@@ -52,11 +54,11 @@ module AirPlayer
     end
 
     private
-      def display_information(media)
+      def display_information(device, media)
         puts
         puts " Source: #{media.path}"
         puts "  Title: #{media.title}"
-        puts " Device: #{@device.name} (#{@device.ip})"
+        puts " Device: #{device.name} (#{device.ip})"
 
         @progressbar = ProgressBar.create(format: '   %a |%b%i| %p%% %t')
       end
@@ -79,6 +81,18 @@ module AirPlayer
 
       def progress?
         0 < @current_sec && @total_sec - @current_sec > 1
+      end
+
+      def select_device(device_number = nil)
+        device_number ||= 0
+        device = Device.new
+
+        if device.exist?(device_number)
+          device.get(device_number)
+        else
+          puts "Device number #{device_number} is not found. Use default device"
+          device.default
+        end
       end
   end
 end

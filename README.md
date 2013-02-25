@@ -1,8 +1,9 @@
-AirPlayer [![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer) [![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer) [![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
+AirPlayer [![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer) [![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
 ================================================================================
 
 Command-line AirPlay video client for Apple TV
 
+[![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer) 
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
 [![Code Climate](https://codeclimate.com/github/Tomohiro/airplayer.png)](https://codeclimate.com/github/Tomohiro/airplayer)
 
@@ -14,9 +15,9 @@ Requirements
 -------------------------------------------------------------------------------
 
 - OSX or Ubuntu
-- Ruby 1.9.3 or later
+- Ruby 1.9.3, 2.0.0
 - AppleTV 2G or later
-- [youtube-dl](http://rg3.github.com/youtube-dl/)
+- [youtube-dl](http://rg3.github.com/youtube-dl/) # If you want to watch YouTube
 
 
 ### Ubuntu
@@ -130,6 +131,25 @@ $ airplayer play '~/Movies/Trailers' --repeat
 
 ```sh
 $ airplayer play '~/Movies/Trailers' --shuffle
+```
+
+
+### Select Device
+
+If you have multiple "AirPlay" devices, specifying the device number for the following play is available on any device.
+
+Checke the AirPlay device number
+
+```sh
+$ airplayer devices
+0: John's Apple TV (10.0.1.2:7000) # John's Apple TV number is 0
+1: Jane's Apple TV (10.0.1.3:7000) # Jane's Apple TV number is 1
+```
+
+Use `--device` or `-d` options
+
+```sh
+$ airplayer play --device 1 '~/Movies/GHOST IN THE SHELL.mp4'
 ```
 
 
