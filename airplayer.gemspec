@@ -6,14 +6,14 @@ require 'airplayer/version'
 Gem::Specification.new do |spec|
   spec.name          = 'airplayer'
   spec.version       = AirPlayer::VERSION
-  spec.authors       = ['Tomohiro, TAIRA']
+  spec.authors       = ['Tomohiro TAIRA']
   spec.email         = ['tomohiro.t@gmail.com']
-  spec.description   = %q{Command-line AirPlay video client for Apple TV}
-  spec.summary       = %q{Command-line AirPlay video client for Apple TV}
+  spec.description   = 'Command-line AirPlay video client for Apple TV'
+  spec.summary       = 'Command-line AirPlay video client for Apple TV'
   spec.homepage      = 'https://github.com/Tomohiro/airplayer'
 
-  spec.files         = `git ls-files`.split($\)
-  spec.executables   = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
