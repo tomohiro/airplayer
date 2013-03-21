@@ -1,4 +1,4 @@
-require 'rubygems'
-require 'bundler/setup'
-
 require 'airplayer'
+
+require 'coveralls'
+Coveralls.wear!
