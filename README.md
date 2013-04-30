@@ -6,6 +6,7 @@ Command-line AirPlay video client for Apple TV
 [![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer)
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
 [![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer)
+[![Coverage Status](https://coveralls.io/repos/Tomohiro/airplayer/badge.png?branch=master)](https://coveralls.io/r/Tomohiro/airplayer)
 [![Code Climate](https://codeclimate.com/github/Tomohiro/airplayer.png)](https://codeclimate.com/github/Tomohiro/airplayer)
 
 
