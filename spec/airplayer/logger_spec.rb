@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module AirPlayer
   describe Logger do
+    subject { AirPlayer::Logger }
+
     context 'file path' do
       it 'is /tmp/airplayer-access.log on Linux' do
         if RbConfig::CONFIG['target_os'] =~ /linux|unix/
