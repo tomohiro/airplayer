@@ -4,5 +4,5 @@ rvm:
   - 2.0.0
 before_install:
   - 'sudo apt-get -qq update'
-  - 'sudo apt-get -qq install rdnssd libavahi-compat-libdnssd-dev'
+  - 'sudo apt-get -qq install youtube-dl rdnssd libavahi-compat-libdnssd-dev'
 script: bundle exec rake spec
