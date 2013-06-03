@@ -21,6 +21,7 @@ module AirPlayer
 
   SUPPORTED_DOMAINS = %w(
     youtube
+    youtu.be
   )
 
   class Media
@@ -44,12 +45,12 @@ module AirPlayer
 
     def self.playable?(path)
       MIME::Types.type_for(path).each do |mimetype|
-        return SUPPORTED_MIME_TYPES.include? mimetype
+        return SUPPORTED_MIME_TYPES.include?(mimetype)
       end
 
       host = URI.parse(path).host
       SUPPORTED_DOMAINS.each do |domain|
-        return host =~ /#{domain}/
+        return true if host =~ /#{domain}/
       end
 
       false
@@ -75,7 +76,7 @@ module AirPlayer
     private
       def online_media_path(uri)
         case URI.parse(uri).host
-        when /youtube/
+        when /youtube|youtu\.be/
           uri = `youtube-dl -g #{uri}`
         else
           uri
@@ -84,7 +85,7 @@ module AirPlayer
 
       def online_media_title(uri)
         case URI.parse(uri).host
-        when /youtube/
+        when /youtube|youtu\.be/
           title = `youtube-dl -e #{uri}`
         else
           title = File.basename(uri)
