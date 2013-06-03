@@ -5,7 +5,7 @@ module AirPlayer
     subject { AirPlayer::Logger }
 
     context 'file path' do
-      it 'is /tmp/airplayer-access.log on Linux' do
+      it '/tmp/airplayer-access.log on Linux' do
         if RbConfig::CONFIG['target_os'] =~ /linux|unix/
           expect(subject.path).to eq '/tmp/airplayer-access.log'
         end

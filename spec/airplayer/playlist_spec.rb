@@ -22,14 +22,14 @@ module AirPlayer
       end
 
       context 'multiple files' do
-        its 'have multiple files' do
+        it 'have multiple files' do
           expect(subject.add('./video.mp4').size).to eq 1
           expect(subject.add('./video.m4v').size).to eq 2
         end
       end
 
       context 'local file' do
-        its 'type is Media' do
+        it 'type is Media' do
           subject.add('../airplayer')
           subject.entries do |media|
             expect(media).to be_kind_of AirPlayer::Media
