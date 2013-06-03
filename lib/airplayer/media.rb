@@ -25,7 +25,7 @@ module AirPlayer
   )
 
   class Media
-    attr_reader :title, :path, :type
+    attr_reader :title, :path, :type, :local
 
     def initialize(target)
       path = File.expand_path(target)
@@ -34,12 +34,14 @@ module AirPlayer
         @video_server = AirPlayer::Server.new(path)
         @path  = @video_server.uri
         @title = File.basename(path)
-        @type  = :file
+        @type  = :video
+        @local = true
       else
         uri = URI.encode(target)
         @path  = online_media_path(uri)
         @title = online_media_title(uri)
-        @type  = :url
+        @type  = :video
+        @local = false
       end
     end
 
@@ -57,20 +59,24 @@ module AirPlayer
     end
 
     def open
-      @video_server.start if file?
+      if local? && video?
+        @video_server.start
+      end
       @path
     end
 
     def close
-      @video_server.stop if file?
+      if local? && video?
+        @video_server.stop
+      end
     end
 
-    def file?
-      @type == :file
+    def video?
+      @type == :video
     end
 
-    def url?
-      @type == :url
+    def local?
+      @local == true
     end
 
     private
