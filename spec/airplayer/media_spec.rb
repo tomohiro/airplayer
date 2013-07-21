@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 module AirPlayer
@@ -19,6 +20,7 @@ module AirPlayer
         expect(subject.playable?('007 SKYFALL.flv')).to be_false
         expect(subject.playable?('007 SKYFALL.wmv')).to be_false
         expect(subject.playable?('.DS_Store')).to be_false
+        expect(subject.playable?('Fate_Kaleid_Liner_プリズマ☆イリヤ')).to be_false
       end
     end
 
