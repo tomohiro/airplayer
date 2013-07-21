@@ -48,7 +48,7 @@ module AirPlayer
         return SUPPORTED_MIME_TYPES.include?(mimetype)
       end
 
-      host = URI.parse(path).host
+      host = URI.parse(URI.escape(path)).host
       SUPPORTED_DOMAINS.each do |domain|
         return true if host =~ /#{domain}/
       end
