@@ -2,7 +2,9 @@ require 'spec_helper'
 
 module AirPlayer
   describe Device do
-    let (:device) { AirPlayer::Device }
+    let (:device) do
+      AirPlayer::Device
+    end
 
     describe '#devices' do
       it 'returns array' do
@@ -13,7 +15,7 @@ module AirPlayer
     describe '#get' do
       context 'with exist device number' do
         it 'returns instance of device' do
-          expect(device.get(0)).to be_kind_of ::Airplay::Device
+          expect(device.get(0)).to be_kind_of Airplay::Device
         end
       end
 

@@ -3,7 +3,9 @@ require 'spec_helper'
 
 module AirPlayer
   describe Media do
-    let (:media) { AirPlayer::Media }
+    let (:media) do
+      AirPlayer::Media
+    end
 
     describe '#playable?' do
       context 'with supported mime types' do

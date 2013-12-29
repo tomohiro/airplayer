@@ -6,20 +6,11 @@ module AirPlayer
       AirPlayer::Playlist.new
     end
 
-    describe '#add' do
+    describe '.add' do
       context 'with URL' do
-        it 'returns media type is url' do
+        it 'return media type is url' do
           playlist.add('http://example.com/video.mp4')
           expect(playlist.first.path).to match 'http'
-        end
-      end
-
-      context 'with Podcast RSS' do
-        it 'returns media instances' do
-          playlist.add('http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml')
-          playlist.entries do |media|
-            expect(media).to be_kind_of AirPlayer::Media
-          end
         end
       end
 
@@ -30,9 +21,18 @@ module AirPlayer
         end
       end
 
+      context 'with podcast RSS' do
+        it 'returns media instances' do
+          playlist.add('http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml')
+          playlist.entries do |media|
+            expect(media).to be_kind_of AirPlayer::Media
+          end
+        end
+      end
+
       context 'with local file' do
-        it 'type is Media' do
-          playlist.add('../airplayer')
+        it 'returns media instances' do
+          playlist.add('../video.mp4')
           playlist.entries do |media|
             expect(media).to be_kind_of AirPlayer::Media
           end
