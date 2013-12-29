@@ -2,8 +2,8 @@ require 'ruby-progressbar'
 
 module AirPlayer
   class Controller
-    def initialize(device: nil)
-      @device      = Airplay[select_device(device).name]
+    def initialize(options = { device: nil })
+      @device      = Airplay[select_device(options[:device]).name]
       @player      = nil
       @progressbar = nil
     end
