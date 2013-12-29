@@ -34,16 +34,16 @@ module AirPlayer
     end
 
     private
-      def select_device(device_number = nil)
+      def select_device(device_number)
         device_number ||= 0
-        device = Device.new
+        device = Device.get(device_number)
 
-        if device.exist?(device_number)
-          device.get(device_number)
-        else
+        unless device
           puts "Device number #{device_number} is not found. Use default device"
-          device.default
+          device = Device.default
         end
+
+        device
       end
   end
 end

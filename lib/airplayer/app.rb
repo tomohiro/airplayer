@@ -16,7 +16,9 @@ module AirPlayer
 
     desc 'devices', 'Show AirPlay devices'
     def devices
-      Device.new.list
+      Device.devices.each_with_index do |device, number|
+        puts "#{number}: #{device.name} (#{device.address})"
+      end
     end
 
     map '--version' => :version
