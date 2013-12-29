@@ -3,6 +3,8 @@ module AirPlayer
     class << self
       def devices
         Airplay.devices.to_a
+      rescue Airplay::Browser::NoDevicesFound
+        abort 'AirPlay devices not found'
       end
 
       def get(device_number)
