@@ -7,9 +7,10 @@ module AirPlayer
     method_option :shuffle, aliases: '-s', desc: 'Shuffle play',  type: :boolean
     method_option :device,  aliases: '-d', desc: 'Device number', type: :numeric
     def play(target)
-      controller = Controller.new
+      controller = Controller.new(device: options.fetch('device', nil))
       Playlist.new(options).add(target).entries do |media|
-        controller.play(media, device: options.fetch('device', nil))
+        controller.play(media)
+        controller.pause
       end
     end
 
