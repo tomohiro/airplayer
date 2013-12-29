@@ -1,26 +1,24 @@
 module AirPlayer
   class Device
-    def initialize
-      @airplay = Airplay::Client.new
-    rescue Airplay::Client::ServerNotFoundError
-      abort "[ERROR] AirPlay device is not found"
+    def devices
+      Airplay.devices.to_a
     end
 
     def default
-      @airplay.browse.first
+      devices.first
     end
 
     def exist?(device_number)
-      !!@airplay.browse.at(device_number)
+      !!devices.at(device_number)
     end
 
     def get(device_number)
-      @airplay.browse[device_number]
+      Airplay[devices.at(device_number).name]
     end
 
     def list
-      @airplay.browse.each_with_index do |device, number|
-        puts "#{number}: #{device.name} (#{device.ip}:#{device.port})"
+      Airplay.devices.each_with_index do |device, number|
+        puts "#{number}: #{device.name} (#{device.address})"
       end
     end
   end
