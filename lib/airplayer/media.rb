@@ -31,8 +31,7 @@ module AirPlayer
       path = File.expand_path(target)
 
       if File.exist? path
-        @video_server = AirPlayer::Server.new(path)
-        @path  = @video_server.uri
+        @path  = path
         @title = File.basename(path)
         @type  = :file
       else
@@ -54,15 +53,6 @@ module AirPlayer
       end
 
       false
-    end
-
-    def open
-      @video_server.start if file?
-      @path
-    end
-
-    def close
-      @video_server.stop if file?
     end
 
     def file?
