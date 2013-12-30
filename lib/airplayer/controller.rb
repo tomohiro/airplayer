@@ -3,47 +3,34 @@ require 'ruby-progressbar'
 module AirPlayer
   class Controller
     def initialize(options = { device: nil })
-      @device      = Airplay[select_device(options[:device]).name]
+      @device      = Device.get(options[:device])
       @player      = nil
       @progressbar = nil
     end
 
     def play(media)
-      raise TypeError unless media.is_a? Media
+      puts " Source: #{media.path}"
+      puts "  Title: #{media.title}"
+      puts " Device: #{@device.name} (Resolution: #{@device.info.resolution})"
 
-      puts
-      puts "  Source: #{media.path}"
-      puts " Playing: #{media.title}"
-      puts "  Device: #{@device.name} [#{@device.info.resolution}]"
-
-      @progressbar = ProgressBar.create(title: @device.name, format: '   %a |%b%i| %p%% %t')
+      @progressbar = ProgressBar.create(format: '   %a |%b%i| %p%% %t')
       @player = @device.play(media.path)
       @player.progress -> playback {
+        @progressbar.title    = 'Streaming'
         @progressbar.progress = playback.percent if playback.percent
       }
       @player.wait
-    rescue TypeError
-      abort '[ERROR] Not media class'
-    rescue
-      abort 'Play stopped'
     end
 
     def pause
-      @player.stop if @player
-      @progressbar.finish if @progressbar
-    end
-
-    private
-      def select_device(device_number)
-        device_number ||= 0
-        device = Device.get(device_number)
-
-        unless device
-          puts "Device number #{device_number} is not found. Use default device"
-          device = Device.default
-        end
-
-        device
+      if @player
+        @player.stop
       end
+
+      if @progressbar
+        @progressbar.title = 'Complete'
+        @progressbar.finish
+      end
+    end
   end
 end

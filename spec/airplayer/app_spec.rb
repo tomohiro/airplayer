@@ -13,9 +13,13 @@ module AirPlayer
     end
 
     describe '.devices' do
+      before do
+        Airplay.devices << double_device
+      end
+
       it 'display devices' do
         devices = capture(:stdout) { airplayer.devices }
-        expect(devices).to match dummy_device.name
+        expect(devices).to match double_device.name
       end
     end
 
