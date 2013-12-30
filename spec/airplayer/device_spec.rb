@@ -6,6 +6,10 @@ module AirPlayer
       AirPlayer::Device
     end
 
+    before do
+      Airplay.devices << double_device
+    end
+
     describe '#devices' do
       it 'returns array' do
         expect(device.devices).to be_kind_of Array
@@ -20,8 +24,8 @@ module AirPlayer
       end
 
       context 'with not exist device number' do
-        it 'returns nil' do
-          expect(device.get(99)).to be nil
+        it 'returns default device' do
+          expect(device.get(99)).to eq device.default
         end
       end
     end
@@ -42,7 +46,7 @@ module AirPlayer
 
     describe '#default' do
       it 'returns first airplay device' do
-        expect(device.default).to eq dummy_device
+        expect(device.default).to eq Airplay.devices.first
       end
     end
   end
