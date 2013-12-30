@@ -17,7 +17,7 @@ module AirPlayer
     desc 'devices', 'Show AirPlay devices'
     def devices
       Device.devices.each_with_index do |device, number|
-        puts "#{number}: #{device.name} (#{device.address})"
+        puts "#{number}: #{device.name} (Resolution: #{device.info.resolution}, Version: #{device.info.os_version}, IP: #{device.address})"
       end
     end
 
