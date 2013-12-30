@@ -13,7 +13,7 @@ module AirPlayer
         end
       end
 
-      context 'with no args' do
+      context 'without args' do
         it 'returns instance of Controller' do
           expect(controller.new).to be_kind_of Controller
         end
