@@ -1,8 +1,11 @@
 # encoding: UTF-8
+require 'fakefs/spec_helpers'
 require 'spec_helper'
 
 module AirPlayer
   describe Media do
+    include FakeFS::SpecHelpers
+
     let (:media) do
       AirPlayer::Media
     end
@@ -23,7 +26,7 @@ module AirPlayer
         it 'returns false' do
           expect(media.playable?('007 SKYFALL.flv')).to be false
           expect(media.playable?('007 SKYFALL.wmv')).to be false
-          expect(media.playable?('.DS_Store')).to be false
+          expect(media.playable?('NOT_PLAYABLE_FILE')).to be false
         end
       end
     end
@@ -31,7 +34,8 @@ module AirPlayer
     describe '.file?' do
       context 'with given local file' do
         it 'returns true' do
-          expect(media.new('./Gemfile').file?).to be true
+          FileUtils.touch('fake_movie.m4v')
+          expect(media.new('fake_movie.m4v').file?).to be true
         end
       end
     end
