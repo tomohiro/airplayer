@@ -1,4 +1,5 @@
 require 'airplay'
+Airplay.configuration.load
 
 module AirPlayer
   require 'airplayer/version'
