@@ -24,8 +24,11 @@ module AirPlayer
       end
 
       context 'with not exist device number' do
-        it 'returns default device' do
-          expect(device.get(99)).to eq device.default
+        it 'returns default device and display message' do
+          default_device = nil
+          message = capture(:stdout) { default_device = device.get(99) }
+          expect(default_device).to eq device.default
+          expect(message).to match('Device number 99 is not found')
         end
       end
     end
