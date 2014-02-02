@@ -1,8 +1,9 @@
-AirPlayer [![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
+AirPlayer
 ================================================================================
 
 Command-line AirPlay video client for Apple TV
 
+[![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
 [![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer)
 [![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
 [![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer)
