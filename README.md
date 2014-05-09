@@ -17,8 +17,8 @@ Command-line AirPlay video client for Apple TV
 Requirements
 -------------------------------------------------------------------------------
 
-- OSX or Ubuntu
-- Ruby 1.9.3, 2.0.0
+- OS X or Ubuntu
+- Ruby 1.9.3, 2.0.0 or later
 - AppleTV 2G or later
 - [youtube-dl](http://rg3.github.com/youtube-dl/) (If you want to watch YouTube)
 
