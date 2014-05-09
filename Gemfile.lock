@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airplayer (0.0.9)
+    airplayer (0.1.0)
       airplay (~> 1.0.2)
       http (~> 0.5.0)
       mime-types (= 2.0)
