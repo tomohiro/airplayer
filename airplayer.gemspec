@@ -19,9 +19,12 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'thor'
   spec.add_runtime_dependency 'ruby-progressbar'
-  spec.add_runtime_dependency 'airplay', '= 1.0.2'
   spec.add_runtime_dependency 'rack'
-  spec.add_runtime_dependency 'mime-types'
+  spec.add_runtime_dependency 'http', '~> 0.5.0'
+  spec.add_runtime_dependency 'reel', '~> 0.4.0'
+  spec.add_runtime_dependency 'reel-rack', '~> 0.1.0'
+  spec.add_runtime_dependency 'airplay', '~> 1.0.2'
+  spec.add_runtime_dependency 'mime-types', '= 2.0'
   spec.add_runtime_dependency 'nokogiri'
 
   spec.add_development_dependency 'bundler'
