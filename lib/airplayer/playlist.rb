@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 require 'rss'
-require 'nokogiri'
 
 module AirPlayer
   class Playlist < Array
@@ -36,7 +35,7 @@ module AirPlayer
           :local_dir
         elsif Media.playable? item
           :url
-        elsif RSS::Parser.parse(open(item))
+        elsif item.match(/.+(xml|rss)$/)
           :podcast
         end
       end
@@ -48,8 +47,8 @@ module AirPlayer
       end
 
       def media_in_podcast(path)
-        Nokogiri::XML(open(path)).search('enclosure').map do |node|
-          Media.new(node.attributes['url'].text)
+        RSS::Parser.parse(path).items.map do |node|
+          Media.new(node.link)
         end
       end
   end
