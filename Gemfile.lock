@@ -5,7 +5,6 @@ PATH
       airplay (~> 1.0.2)
       http (~> 0.5.0)
       mime-types (= 2.0)
-      nokogiri
       rack
       reel (~> 0.4.0)
       reel-rack (~> 0.1.0)
@@ -69,7 +68,6 @@ GEM
     method_source (0.8.2)
     micromachine (1.0.4)
     mime-types (2.0)
-    mini_portile (0.5.3)
     multi_json (1.10.0)
     net-http-digest_auth (1.2.1)
     net-ptth (0.0.17)
@@ -77,8 +75,6 @@ GEM
       http_parser.rb (>= 0.6.0.beta.2)
       rack (>= 1.4.5)
     nio4r (1.0.0)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
