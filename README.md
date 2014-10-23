@@ -163,9 +163,9 @@ Supported MIME types
 
 File extension | MIME type       | Ruby `mime-types`
 -------------- | --------------- | -----------------------------
-.ts            | video/MP2T      | video/MP2T
+.ts            | video/MP2T      | video/mp2t
 .mov           | video/quicktime | video/quicktime
-.m4v           | video/mpeg4     | video/vnd.objectvideo
+.m4v           | video/mpeg4     | video/m4v
 .mp4           | video/mpeg4     | application/mp4, video/mp4
 
 
