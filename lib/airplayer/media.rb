@@ -6,15 +6,15 @@ module AirPlayer
   #
   # File Extension | MIME type       | Ruby `mime-types`
   # -------------- | --------------- | -----------------------------
-  # .ts            | video/MP2T      | video/MP2T 
+  # .ts            | video/MP2T      | video/mp2t
   # .mov           | video/quicktime | video/quicktime
-  # .m4v           | video/mpeg4     | video/vnd.objectvideo
+  # .m4v           | video/mpeg4     | video/m4v
   # .mp4           | video/mpeg4     | application/mp4, video/mp4
   SUPPORTED_MIME_TYPES = %w(
     application/mp4
     video/mp4
-    video/vnd.objectvideo
-    video/MP2T
+    video/m4v
+    video/mp2t
     video/quicktime
     video/mpeg4
   )
@@ -43,7 +43,7 @@ module AirPlayer
     end
 
     def self.playable?(path)
-      MIME::Types.type_for(path).each do |mimetype|
+      MIME::Types.of(path).map(&:simplified).each do |mimetype|
         return SUPPORTED_MIME_TYPES.include?(mimetype)
       end
 
