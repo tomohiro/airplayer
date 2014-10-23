@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'celluloid-io', '= 0.15.0'
   spec.add_runtime_dependency 'cuba', '= 3.1.1'
   spec.add_runtime_dependency 'airplay', '~> 1.0.2'
-  spec.add_runtime_dependency 'mime-types', '= 2.0'
+  spec.add_runtime_dependency 'mime-types', '~> 2.4.0'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
