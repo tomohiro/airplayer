@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airplayer (1.0.0.pre)
+    airplayer (1.0.0)
       airplay (~> 1.0.2)
       celluloid (= 0.15.2)
       celluloid-io (= 0.15.0)
