@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    airplayer (1.0.0)
+    airplayer (1.0.1)
       airplay (~> 1.0.2)
       celluloid (= 0.15.2)
       celluloid-io (= 0.15.0)
       cuba (= 3.1.1)
       http (= 0.5.0)
       mime-types (~> 2.4.0)
-      rack
+      rack (~> 1.5.0)
       reel (= 0.4.0)
       reel-rack (= 0.1.0)
       ruby-progressbar
