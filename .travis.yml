@@ -1,8 +1,9 @@
 language: ruby
 rvm:
   - 1.9.3
-  - 2.1.3
+  - 2.1.5
+  - 2.2.0
 before_install:
-  - 'sudo apt-get -qq update'
-  - 'sudo apt-get -qq install youtube-dl rdnssd libavahi-compat-libdnssd-dev'
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install youtube-dl rdnssd libavahi-compat-libdnssd-dev
 script: bundle exec rake spec
