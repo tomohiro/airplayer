@@ -4,11 +4,11 @@ AirPlayer
 Command-line AirPlay video client for Apple TV
 
 [![Stillmaintained](http://stillmaintained.com/Tomohiro/airplayer.png)](http://stillmaintained.com/Tomohiro/airplayer)
-[![Gem Version](https://badge.fury.io/rb/airplayer.png)](http://badge.fury.io/rb/airplayer)
-[![Dependency Status](https://gemnasium.com/Tomohiro/airplayer.png)](https://gemnasium.com/Tomohiro/airplayer)
-[![Build Status](https://travis-ci.org/Tomohiro/airplayer.png?branch=master)](https://travis-ci.org/Tomohiro/airplayer)
-[![Coverage Status](https://coveralls.io/repos/Tomohiro/airplayer/badge.png?branch=master)](https://coveralls.io/r/Tomohiro/airplayer)
-[![Code Climate](https://codeclimate.com/github/Tomohiro/airplayer.png)](https://codeclimate.com/github/Tomohiro/airplayer)
+[![Gem Version](https://img.shields.io/gem/v/airplayer.svg?style=flat-square)](http://badge.fury.io/rb/airplayer)
+[![Dependency Status](https://img.shields.io/gemnasium/Tomohiro/airplayer.svg?style=flat-square)](https://gemnasium.com/Tomohiro/airplayer)
+[![Build Status](https://img.shields.io/travis/Tomohiro/airplayer.svg?style=flat-square)](https://travis-ci.org/Tomohiro/airplayer)
+[![Coverage Status](https://img.shields.io/coveralls/Tomohiro/airplayer.svg?style=flat-square)](https://coveralls.io/r/Tomohiro/airplayer)
+[![Code Climate](https://img.shields.io/codeclimate/github/Tomohiro/airplayer.svg?style=flat-square)](https://codeclimate.com/github/Tomohiro/airplayer)
 
 
 ---
