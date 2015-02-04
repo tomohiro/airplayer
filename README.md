@@ -23,6 +23,16 @@ Requirements
 - [youtube-dl](http://rg3.github.com/youtube-dl/) (If you want to watch YouTube)
 
 
+### Arch Linux
+
+```sh
+$ sudo pacman -S nss-mdns youtube-dl
+```
+or
+```sh
+$ yaourt -S nss-mdns youtube-dl
+```
+
 ### Ubuntu
 
 ```sh
