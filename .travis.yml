@@ -3,7 +3,12 @@ rvm:
   - 1.9.3
   - 2.1.5
   - 2.2.0
+  - 2.2.1
+
+cache: bundler
+
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install youtube-dl rdnssd libavahi-compat-libdnssd-dev
+
 script: bundle exec rake spec
