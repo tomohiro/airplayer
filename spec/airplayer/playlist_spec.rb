@@ -3,9 +3,14 @@ require 'spec_helper'
 
 module AirPlayer
   describe Playlist do
+    include FakeFS::SpecHelpers
+
     let (:playlist) do
       AirPlayer::Playlist.new
     end
+
+    # works even without this, but it prevents connecting to internet
+    before{ allow(YoutubeDl).to receive(:enabled?).and_return(false) }
 
     describe '.add' do
       context 'with local directory' do
@@ -31,12 +36,19 @@ module AirPlayer
 
       context 'with multiple files' do
         it 'have multiple files' do
+          FakeFS do
+            FileUtils.touch('video.m4v')
+            FileUtils.touch('video.mp4')
+          end
+
           expect(playlist.add('video.mp4').size).to eq 1
           expect(playlist.add('video.m4v').size).to eq 2
         end
       end
 
       context 'with podcast RSS' do
+        before { FileUtils.mkpath(Dir.tmpdir) }
+
         it 'returns media instances' do
           playlist.add('http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml')
           playlist.entries do |media|
@@ -47,9 +59,23 @@ module AirPlayer
 
       context 'with local file' do
         it 'returns media instances' do
+          FakeFS do
+            FileUtils.touch('video.mp4')
+          end
+
           playlist.add('video.mp4')
           playlist.entries do |media|
             expect(media).to be_kind_of AirPlayer::Media
+          end
+        end
+      end
+
+      context 'with stream url' do
+        it 'returns media instances' do
+          playlist.add('https://www.stream.cz/vesele-velikonoce/10005380-nadiwich')
+          playlist.entries do |media|
+            expect(media).to be_kind_of AirPlayer::Media
+            expect(media.type).to eq(:url)
           end
         end
       end

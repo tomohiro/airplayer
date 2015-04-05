@@ -19,11 +19,6 @@ module AirPlayer
     video/mpeg4
   )
 
-  SUPPORTED_DOMAINS = %w(
-    youtube
-    youtu.be
-  )
-
   class Media
     attr_reader :title, :path, :type
 
@@ -35,25 +30,37 @@ module AirPlayer
         @title = File.basename(path)
         @type  = :file
       else
-        uri = URI.encode(target)
-        @path  = online_media_path(uri)
-        @title = online_media_title(uri)
+        @path  = YoutubeDl.get_url(target)
+        @title = YoutubeDl.get_title(target)
         @type  = :url
       end
     end
 
-    def self.playable?(path)
-      MIME::Types.of(path).map(&:simplified).each do |mimetype|
-        return SUPPORTED_MIME_TYPES.include?(mimetype)
+    class << self
+      def playable?(path)
+        if is_url?(path)
+          YoutubeDl.supports?(path) || supported_mime_type?(YoutubeDl.filename(path))
+        else
+          supported_mime_type?(path)
+        end
       end
 
-      host = URI.parse(URI.escape(path)).host
-      SUPPORTED_DOMAINS.each do |domain|
-        return true if host =~ /#{domain}/
+      def is_url?(path)
+        uri = URI(path)
+        uri.scheme && uri.absolute?
+      rescue URI::InvalidURIError
+        false
       end
 
-      false
+      def supported_mime_type?(path)
+        MIME::Types.of(path).map(&:simplified).each do |mimetype|
+          return SUPPORTED_MIME_TYPES.include?(mimetype)
+        end
+
+        false
+      end
     end
+
 
     def file?
       @type == :file
@@ -62,24 +69,5 @@ module AirPlayer
     def url?
       @type == :url
     end
-
-    private
-      def online_media_path(uri)
-        case URI.parse(uri).host
-        when /youtube|youtu\.be/
-          uri = `youtube-dl -g #{uri}`
-        else
-          uri
-        end
-      end
-
-      def online_media_title(uri)
-        case URI.parse(uri).host
-        when /youtube|youtu\.be/
-          title = `youtube-dl -e #{uri}`
-        else
-          title = File.basename(uri)
-        end
-      end
   end
 end

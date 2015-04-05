@@ -18,6 +18,7 @@ module AirPlayer
       when :url
         push(Media.new(item))
       end
+
       self
     end
 
@@ -33,7 +34,7 @@ module AirPlayer
       def type(item)
         if Dir.exists?(File.expand_path(item))
           :local_dir
-        elsif Media.playable? item
+        elsif Media.playable?(item)
           :url
         elsif item.match(/.+(xml|rss)$/)
           :podcast

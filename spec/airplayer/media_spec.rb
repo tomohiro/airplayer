@@ -29,6 +29,19 @@ module AirPlayer
           expect(media.playable?('NOT_PLAYABLE_FILE')).to be false
         end
       end
+
+      context 'with urls' do
+        it 'delegates to YoutubeDl' do
+
+          expect(YoutubeDl).to receive(:supports?)
+                                          .with('http://example.com/video.mp4').and_return(true)
+          expect(media.playable?('http://example.com/video.mp4')).to be
+
+          expect(YoutubeDl).to receive(:supports?)
+                                          .with('http://example.com/not-video').and_return(false)
+          expect(media.playable?('http://example.com/not-video')).not_to be
+        end
+      end
     end
 
     describe '.file?' do
@@ -42,6 +55,8 @@ module AirPlayer
 
     describe '.url?' do
       context 'with given URL' do
+        before { allow(YoutubeDl).to receive(:enabled?).and_return(false) }
+
         it 'returns true' do
           expect(media.new('http://example.com/video.mp4').url?).to be true
         end
