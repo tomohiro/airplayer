@@ -179,6 +179,12 @@ File extension | MIME type       | Ruby `mime-types`
 .mp4           | video/mpeg4     | application/mp4, video/mp4
 
 
+# OSX Service
+
+You can create Automator Service, that opens URL from your browser in airplayer.
+![automator service](https://cloud.githubusercontent.com/assets/154571/6997755/aa2599e8-dbc8-11e4-8cc4-9671d9cd8ad7.png)
+
+
 LICENSE
 --------------------------------------------------------------------------------
 
