@@ -11,4 +11,8 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install youtube-dl rdnssd libavahi-compat-libdnssd-dev
 
+before_script:
+  - which youtube-dl
+  - youtube-dl --version
+
 script: bundle exec rake spec
