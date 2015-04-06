@@ -5,11 +5,16 @@ rvm:
   - 2.2.0
   - 2.2.1
 
+env:
+  YOUTUBE_DL_VERSION=2015.04.03
+
 cache: bundler
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get -qq install youtube-dl rdnssd libavahi-compat-libdnssd-dev
+  - sudo apt-get -qq install rdnssd libavahi-compat-libdnssd-dev
+  - sudo curl https://yt-dl.org/downloads/${YOUTUBE_DL_VERSION}/youtube-dl -o /usr/local/bin/youtube-dl
+  - sudo chmod a+x /usr/local/bin/youtube-dl
 
 before_script:
   - which youtube-dl
