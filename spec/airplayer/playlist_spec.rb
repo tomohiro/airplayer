@@ -50,7 +50,7 @@ module AirPlayer
         before { FileUtils.mkpath(Dir.tmpdir) }
 
         it 'returns media instances' do
-          playlist.add('http://rss.cnn.com/services/podcasting/cnnnewsroom/rss.xml')
+          playlist.add('http://rss.cnn.com/services/podcasting/studentnews/rss.xml')
           playlist.entries do |media|
             expect(media).to be_kind_of AirPlayer::Media
           end
