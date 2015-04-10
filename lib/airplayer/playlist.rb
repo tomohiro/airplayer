@@ -6,7 +6,7 @@ module AirPlayer
   class Playlist < Array
     def initialize(options = {})
       @shuffle = options['shuffle'] || false
-      @repeat  = options['repeat']  || false
+      @repeat  = options['repeat'] || false
     end
 
     def add(item)
@@ -31,26 +31,27 @@ module AirPlayer
     end
 
     private
-      def type(item)
-        if Dir.exists?(File.expand_path(item))
-          :local_dir
-        elsif Media.playable?(item)
-          :url
-        elsif item.match(/.+(xml|rss)$/)
-          :podcast
-        end
-      end
 
-      def media_in_local(path)
-        Dir.entries(File.expand_path(path)).sort.map do |node|
-          Media.new(File.expand_path(node, path)) if Media.playable? node
-        end.compact
+    def type(item)
+      if Dir.exist?(File.expand_path(item))
+        :local_dir
+      elsif Media.playable?(item)
+        :url
+      elsif item.match(/.+(xml|rss)$/)
+        :podcast
       end
+    end
 
-      def media_in_podcast(path)
-        RSS::Parser.parse(path).items.map do |node|
-          Media.new(node.link)
-        end
+    def media_in_local(path)
+      Dir.entries(File.expand_path(path)).sort.map do |node|
+        Media.new(File.expand_path(node, path)) if Media.playable? node
+      end.compact
+    end
+
+    def media_in_podcast(path)
+      RSS::Parser.parse(path).items.map do |node|
+        Media.new(node.link)
       end
+    end
   end
 end
