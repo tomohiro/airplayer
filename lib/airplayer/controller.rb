@@ -14,11 +14,11 @@ module AirPlayer
       puts " Device: #{@device.name} (Resolution: #{@device.info.resolution})"
 
       @progressbar = ProgressBar.create(format: '   %a |%b%i| %p%% %t')
+      @player = @device.play(media.path)
       @player.progress -> playback {
         @progressbar.title    = 'Streaming'
         @progressbar.progress = playback.percent if playback.percent
       }
-      @player = @device.play(media.path)
       @player.wait
     end
 
