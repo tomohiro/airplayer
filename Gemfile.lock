@@ -153,5 +153,6 @@ DEPENDENCIES
   coveralls
   fakefs
   guard-rspec
+  pry
   rake
   rspec
