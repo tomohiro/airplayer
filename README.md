@@ -19,6 +19,7 @@ Requirements
 
 - OS X, Ubuntu, Arch Linux ([nss-mdns](https://www.archlinux.org/packages/extra/x86_64/nss-mdns/) package is required)
 - Ruby 1.9.3, 2.1, 2.2 or later
+- Bundler 1.10.0 or later
 - AppleTV 2G or later
 - [youtube-dl](http://rg3.github.com/youtube-dl/) (If you want to watch YouTube)
 
