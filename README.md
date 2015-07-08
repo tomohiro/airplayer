@@ -17,24 +17,26 @@ Command-line AirPlay video client for Apple TV
 Requirements
 -------------------------------------------------------------------------------
 
-- OS X, Ubuntu, Arch Linux ([nss-mdns](https://www.archlinux.org/packages/extra/x86_64/nss-mdns/) package is required)
+- OS X, Ubuntu, Arch Linux
 - Ruby 1.9.3, 2.1, 2.2 or later
 - Bundler 1.10.0 or later
 - AppleTV 2G or later
 - [youtube-dl](http://rg3.github.com/youtube-dl/) (If you want to watch YouTube)
 
+### For Arch Linux
 
-### Arch Linux
+[nss-mdns](https://www.archlinux.org/packages/extra/x86_64/nss-mdns/) package is required.
 
 ```sh
-$ sudo pacman -S nss-mdns youtube-dl
+$ sudo pacman -S nss-mdns
 ```
 or
+
 ```sh
-$ yaourt -S nss-mdns youtube-dl
+$ yaourt -S nss-mdns
 ```
 
-### Ubuntu
+### For Ubuntu
 
 ```sh
 $ sudo apt-get install rdnssd libavahi-compat-libdnssd-dev
