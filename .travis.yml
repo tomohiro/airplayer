@@ -1,5 +1,5 @@
 sudo: false
-language: ruby
+language: objective-c
 rvm:
   - 1.9.3
   - 2.1.5
