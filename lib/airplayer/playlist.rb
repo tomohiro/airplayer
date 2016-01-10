@@ -49,7 +49,8 @@ module AirPlayer
     end
 
     def media_in_podcast(path)
-      RSS::Parser.parse(path).items.map do |node|
+      strict_parse = false
+      RSS::Parser.parse(path, strict_parse).items.map do |node|
         Media.new(node.link)
       end
     end
