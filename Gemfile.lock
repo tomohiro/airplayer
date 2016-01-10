@@ -8,6 +8,7 @@ PATH
       cuba (= 3.1.1)
       http (= 0.5.0)
       mime-types (~> 2.4.0)
+      nio4r (~> 1.1.0)
       rack (~> 1.5.0)
       reel (= 0.4.0)
       reel-rack (= 0.1.0)
@@ -86,7 +87,7 @@ GEM
       http_parser.rb (>= 0.6.0.beta.2)
       rack (>= 1.4.5)
     netrc (0.10.3)
-    nio4r (1.1.0)
+    nio4r (1.1.1)
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -157,4 +158,4 @@ DEPENDENCIES
   rspec
 
 BUNDLED WITH
-   1.10.5
+   1.11.2
