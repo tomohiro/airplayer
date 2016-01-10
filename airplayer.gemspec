@@ -19,6 +19,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}).map { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  # This gem will work with 2.2.0 or greater...
+  spec.required_ruby_version = '>= 2.2.0'
+
   spec.add_runtime_dependency 'thor'
   spec.add_runtime_dependency 'ruby-progressbar'
   spec.add_runtime_dependency 'mime-types', '~> 2.4.0'
