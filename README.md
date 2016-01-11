@@ -54,7 +54,9 @@ $ gem install airplayer
 ```sh
 $ git clone git://github.com/Tomohiro/airplayer.git
 $ cd airplayer
-$ bundle install --deployment
+$ bundle install --deployment --binstubs
+$ bin/airplayer version
+1.1.0
 ```
 
 
