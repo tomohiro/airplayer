@@ -50,7 +50,7 @@ GEM
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     fakefs (0.6.7)
-    ffi (1.9.10)
+    ffi (1.11.1)
     formatador (0.2.5)
     guard (2.12.8)
       formatador (>= 0.2.4)
